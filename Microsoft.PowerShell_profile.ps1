@@ -69,7 +69,6 @@ function verificaxml {
     mostrarMensagemPadrao  'VERIFICA XML copiado.' $conteudo
 }
 
-
 function merged {
     #Descricao= Merged script.
     $conteudo = Get-Content -path "scripts\merged-nfse-scripts.txt"
@@ -249,9 +248,7 @@ function c {
                 Write-Host "Nova pasta criada... " $inputNamePasta -ForegroundColor Green
                 New-Item -ItemType Directory -Path "$caminho\$inputNamePasta" -Force
                 Start-Process explorer.exe -ArgumentList "$caminho\$inputNamePasta"
-                mostrarLogo;
-                Start-Sleep -Milliseconds 400
-                Exit
+                mostrarMensagemPadrao $null $null
             }
             elseif ($pastasEncontradas.Count -eq 1) {
                 #abre a pasta
@@ -284,7 +281,9 @@ function mostrarMensagemPadrao {
         Set-Clipboard -value $conteudo
     }
 
-    Write-Host $mensagem -ForegroundColor Green
+    if ($mensagem -ne $null) {
+        Write-Host $mensagem -ForegroundColor Green
+    }
     write-host "
               ::::::::::::::::::   :
             ^J555555555555555555: :P5?~:
