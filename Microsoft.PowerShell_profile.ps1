@@ -19,8 +19,8 @@ function b {
 
 function cons {
     #Descricao= Chama integração para CONSULTA.
-    # $conteudo = Get-Content -path "scripts\CONSULTA - CHAMAR INTEGRACAO.txt"
-    $conteudo = Get-Content -path "scripts\CONSULTA - CHAMAR INTEGRACAO.txt"
+    # $conteudo = Get-Content -path "scripts\CONSULTA - CHAMAR INTEGRACAO.sql"
+    $conteudo = Get-Content -path "scripts\CONSULTA - CHAMAR INTEGRACAO.sql"
     Set-Clipboard -value $conteudo
     Write-Host  'CONSULTA copiado.' -ForegroundColor Green
     mostrarLogo;
@@ -30,7 +30,7 @@ function cons {
 
 function env {
     #Descricao= Chama integração para ENVIO.
-    $conteudo = Get-Content -path "scripts\ENVIO - CHAMAR INTEGRACAO.txt"
+    $conteudo = Get-Content -path "scripts\ENVIO - CHAMAR INTEGRACAO.sql"
     Set-Clipboard -value $conteudo
     Write-Host  'ENVIO copiado.' -ForegroundColor Green
     mostrarLogo;
@@ -40,7 +40,7 @@ function env {
 
 function can {
     #Descricao= Chama integração para CANCELAMENTO.
-    $conteudo = Get-Content -path "scripts\CANCELAMENTO - CHAMAR INTEGRACAO.txt"
+    $conteudo = Get-Content -path "scripts\CANCELAMENTO - CHAMAR INTEGRACAO.sql"
     Set-Clipboard -value $conteudo
     Write-Host  'CANCELAMENTO copiado.' -ForegroundColor Green
     mostrarLogo;
@@ -50,7 +50,7 @@ function can {
 
 function contar {
     #Descricao= Conta quantas notas estão em status A nas tabelas MVINTEGRA.
-    $conteudo = Get-Content -path "scripts\CONTAR AGUARDANDO.txt"
+    $conteudo = Get-Content -path "scripts\CONTAR AGUARDANDO.sql"
     Set-Clipboard -value $conteudo
     Write-Host  'CONTAR copiado.' -ForegroundColor Green
     mostrarLogo;
@@ -60,7 +60,7 @@ function contar {
 
 function erro {
     #Descricao= Seta notas para erro na tabela do produto.
-    $conteudo = Get-Content -path "scripts\SETAR ERRO.txt"
+    $conteudo = Get-Content -path "scripts\SETAR ERRO.sql"
     Set-Clipboard -value $conteudo
     Write-Host  'ERRO copiado.' -ForegroundColor Green
     mostrarLogo;
@@ -70,7 +70,7 @@ function erro {
 
 function monta {
     #Descricao= Monta TRIGGERS e PROCEDURES.
-    $conteudo = Get-Content -path "scripts\Script Monta Trigger e procedure.txt"
+    $conteudo = Get-Content -path "scripts\Script Monta Trigger e procedure.sql"
     Set-Clipboard -value $conteudo
     Write-Host  'MONTA copiado.' -ForegroundColor Green
     mostrarLogo;
@@ -80,7 +80,7 @@ function monta {
 
 function drop {
     #Descricao= Dropa pontos de integração.
-    $conteudo = Get-Content -path "scripts\DROP_PONTOS_INTEGRA_NFSE.txt"
+    $conteudo = Get-Content -path "scripts\DROP_PONTOS_INTEGRA_NFSE.sql"
     Set-Clipboard -value $conteudo
     Write-Host  'DROP copiado.' -ForegroundColor Green
     mostrarLogo;
@@ -90,7 +90,7 @@ function drop {
 
 function monitora {
     #Descricao= Cria tabela e triggers para monitora tomcats.
-    $conteudo = Get-Content -path "scripts\CRIA TABELA E TRIGGER PARA MONITORAR OS TOMCATS.txt"
+    $conteudo = Get-Content -path "scripts\CRIA TABELA E TRIGGER PARA MONITORAR OS TOMCATS.sql"
     Set-Clipboard -value $conteudo
     Write-Host  'MONITORA copiado.' -ForegroundColor Green
     mostrarLogo;
@@ -100,7 +100,7 @@ function monitora {
 
 function condicoes {
     #Descricao= Chama integração para consulta.
-    $conteudo = Get-Content -path "scripts\preenche_condicoes_envio_all_v5.txt"
+    $conteudo = Get-Content -path "scripts\preenche_condicoes_envio_all_v5.sql"
     Set-Clipboard -value $conteudo
     Write-Host  'CONDICOES copiado.' -ForegroundColor Green
     mostrarLogo;
@@ -110,7 +110,7 @@ function condicoes {
 
 function verificaxml {
     #Descricao= Verifica XML padrão.
-    $conteudo = Get-Content -path "scripts\VERIFICAR XML PADRAO.txt"
+    $conteudo = Get-Content -path "scripts\VERIFICAR XML PADRAO.sql"
     Set-Clipboard -value $conteudo
     Write-Host  'VERIFICA XML copiado.' -ForegroundColor Green
     mostrarLogo;
@@ -121,7 +121,7 @@ function verificaxml {
 
 function merged {
     #Descricao= Merged script.
-    $conteudo = Get-Content -path "scripts\merged-nfse-scripts.txt"
+    $conteudo = Get-Content -path "scripts\merged-nfse-scripts.sql"
     Set-Clipboard -value $conteudo
     Write-Host  'MERGED copiado.' -ForegroundColor Green
     mostrarLogo;
@@ -131,7 +131,7 @@ function merged {
 
 function espaco {
     #Descricao= Procura por espacos vazios no cadastro de sa�da.
-    $conteudo = Get-Content -path "scripts\PROCURAR ESPACOS CADASTRO SAIDA.txt" -Raw -Encoding UTF8
+    $conteudo = Get-Content -path "scripts\PROCURAR ESPACOS CADASTRO SAIDA.sql" -Raw -Encoding UTF8
     Set-Clipboard -value $conteudo
     Write-Host  'VERIFICAR ESPACO copiado.' -ForegroundColor Green
     mostrarLogo;
@@ -149,7 +149,7 @@ function cloud {
 }
 function tributo {
     #Descricao= Select nos tributos da nota.
-    $conteudo = Get-Content -path "scripts\cTRIBUTO.txt" -Raw -Encoding UTF8
+    $conteudo = Get-Content -path "scripts\cTRIBUTO.sql" -Raw -Encoding UTF8
     Set-Clipboard -value $conteudo
     Write-Host  'TRIBUTO copiado.' -ForegroundColor Green
     mostrarLogo;
