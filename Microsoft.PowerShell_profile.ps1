@@ -1,174 +1,192 @@
 function a {
     #Descricao= Seleciona cd_status,cd_status_nfe da tabela do produto.
-    set-clipboard -value 'select cd_status,cd_status_nfe,a.* from dbamv.nota_fiscal a order by cd_nota_fiscal desc;'    
+    set-clipboard -value 'select cd_status,cd_status_nfe,a.* from dbamv.nota_fiscal a order by cd_nota_fiscal desc;'
     Write-Host  'SELECT a copiado.' -ForegroundColor Green
+    mostrarLogo;
+    mostrarLogo;
     Start-Sleep -Milliseconds 400
     Exit
 }
 
-function b { 
+function b {
     #Descricao= Seleciona cd_status,cd_status_nfe da tabela do produto - PLANO DE SAUDE.
-    set-clipboard -value 'select cd_status,cd_status_nfe,a.* from dbamv.mvs_nota_fiscal a order by cd_nota_fiscal desc;' 
+    set-clipboard -value 'select cd_status,cd_status_nfe,a.* from dbamv.mvs_nota_fiscal a order by cd_nota_fiscal desc;'
     Write-Host  'SELECT b copiado.' -ForegroundColor Green
+    mostrarLogo;
     Start-Sleep -Milliseconds 400
-    Exit 
+    Exit
 }
 
 function cons {
     #Descricao= Chama integração para CONSULTA.
-    $conteudo = Get-Content -path "S:\SERVICOS -TECNICOS\INTEGRACAO_CONSULTORIA\NFSE\CONSULTA - CHAMAR INTEGRACAO.txt" 
+    # $conteudo = Get-Content -path "scripts\CONSULTA - CHAMAR INTEGRACAO.txt"
+    $conteudo = Get-Content -path "scripts\CONSULTA - CHAMAR INTEGRACAO.txt"
     Set-Clipboard -value $conteudo
     Write-Host  'CONSULTA copiado.' -ForegroundColor Green
+    mostrarLogo;
     Start-Sleep -Milliseconds 400
-    Exit 
+    Exit
 }
 
-function env { 
+function env {
     #Descricao= Chama integração para ENVIO.
-    $conteudo = Get-Content -path "S:\SERVICOS -TECNICOS\INTEGRACAO_CONSULTORIA\NFSE\ENVIO - CHAMAR INTEGRACAO.txt"
+    $conteudo = Get-Content -path "scripts\ENVIO - CHAMAR INTEGRACAO.txt"
     Set-Clipboard -value $conteudo
     Write-Host  'ENVIO copiado.' -ForegroundColor Green
+    mostrarLogo;
     Start-Sleep -Milliseconds 400
-    Exit 
+    Exit
 }
 
-function can { 
+function can {
     #Descricao= Chama integração para CANCELAMENTO.
-    $conteudo = Get-Content -path "S:\SERVICOS -TECNICOS\INTEGRACAO_CONSULTORIA\NFSE\CANCELAMENTO - CHAMAR INTEGRACAO.txt"
+    $conteudo = Get-Content -path "scripts\CANCELAMENTO - CHAMAR INTEGRACAO.txt"
     Set-Clipboard -value $conteudo
     Write-Host  'CANCELAMENTO copiado.' -ForegroundColor Green
+    mostrarLogo;
     Start-Sleep -Milliseconds 400
-    Exit       
+    Exit
 }
 
 function contar {
     #Descricao= Conta quantas notas estão em status A nas tabelas MVINTEGRA.
-    $conteudo = Get-Content -path "S:\SERVICOS -TECNICOS\INTEGRACAO_CONSULTORIA\NFSE\CONTAR AGUARDANDO.txt"
+    $conteudo = Get-Content -path "scripts\CONTAR AGUARDANDO.txt"
     Set-Clipboard -value $conteudo
-    Write-Host  'CONTAR copiado.' -ForegroundColor Green 
+    Write-Host  'CONTAR copiado.' -ForegroundColor Green
+    mostrarLogo;
     Start-Sleep -Milliseconds 400
-    Exit 
+    Exit
 }
 
-function erro { 
+function erro {
     #Descricao= Seta notas para erro na tabela do produto.
-    $conteudo = Get-Content -path "S:\SERVICOS -TECNICOS\INTEGRACAO_CONSULTORIA\NFSE\SETAR ERRO.txt"
+    $conteudo = Get-Content -path "scripts\SETAR ERRO.txt"
     Set-Clipboard -value $conteudo
-    Write-Host  'ERRO copiado.' -ForegroundColor Green 
+    Write-Host  'ERRO copiado.' -ForegroundColor Green
+    mostrarLogo;
     Start-Sleep -Milliseconds 400
-    Exit  
+    Exit
 }
 
-function monta { 
+function monta {
     #Descricao= Monta TRIGGERS e PROCEDURES.
-    $conteudo = Get-Content -path "C:\Users\lucas.matheus\Desktop\principais_scripts\Script Monta Trigger e procedure.SQL"
+    $conteudo = Get-Content -path "scripts\Script Monta Trigger e procedure.txt"
     Set-Clipboard -value $conteudo
-    Write-Host  'MONTA copiado.' -ForegroundColor Green 
+    Write-Host  'MONTA copiado.' -ForegroundColor Green
+    mostrarLogo;
     Start-Sleep -Milliseconds 400
-    Exit 
+    Exit
 }
 
 function drop {
     #Descricao= Dropa pontos de integração.
-    $conteudo = Get-Content -path "C:\Users\lucas.matheus\Desktop\principais_scripts\DROP_PONTOS_INTEGRA_NFSE.SQL"
+    $conteudo = Get-Content -path "scripts\DROP_PONTOS_INTEGRA_NFSE.txt"
     Set-Clipboard -value $conteudo
-    Write-Host  'DROP copiado.' -ForegroundColor Green 
+    Write-Host  'DROP copiado.' -ForegroundColor Green
+    mostrarLogo;
     Start-Sleep -Milliseconds 400
-    Exit 
+    Exit
 }
 
-function monitora { 
+function monitora {
     #Descricao= Cria tabela e triggers para monitora tomcats.
-    $conteudo = Get-Content -path "C:\Users\lucas.matheus\Desktop\principais_scripts\CRIA TABELA E TRIGGER PARA MONITORAR OS TOMCATS.sql"
+    $conteudo = Get-Content -path "scripts\CRIA TABELA E TRIGGER PARA MONITORAR OS TOMCATS.txt"
     Set-Clipboard -value $conteudo
-    Write-Host  'MONITORA copiado.' -ForegroundColor Green 
+    Write-Host  'MONITORA copiado.' -ForegroundColor Green
+    mostrarLogo;
     Start-Sleep -Milliseconds 400
-    Exit 
-} 
+    Exit
+}
 
 function condicoes {
     #Descricao= Chama integração para consulta.
-    $conteudo = Get-Content -path "C:\Users\lucas.matheus\Desktop\principais_scripts\preenche_condicoes_envio_all_v5.sql"
+    $conteudo = Get-Content -path "scripts\preenche_condicoes_envio_all_v5.txt"
     Set-Clipboard -value $conteudo
     Write-Host  'CONDICOES copiado.' -ForegroundColor Green
+    mostrarLogo;
     Start-Sleep -Milliseconds 400
-    Exit  
+    Exit
 }
 
-function verificaxml { 
+function verificaxml {
     #Descricao= Verifica XML padrão.
-    $conteudo = Get-Content -path "C:\Users\lucas.matheus\Desktop\principais_scripts\VERIFICAR XML PADRAO.SQL"
+    $conteudo = Get-Content -path "scripts\VERIFICAR XML PADRAO.txt"
     Set-Clipboard -value $conteudo
     Write-Host  'VERIFICA XML copiado.' -ForegroundColor Green
+    mostrarLogo;
     Start-Sleep -Milliseconds 400
-    Exit  
-} 
+    Exit
+}
 
 
-function merged { 
+function merged {
     #Descricao= Merged script.
-    $conteudo = Get-Content -path "C:\Users\diogo.pimentel\Documents\Util MV\Script\merged-nfse-scripts.sql"
+    $conteudo = Get-Content -path "scripts\merged-nfse-scripts.txt"
     Set-Clipboard -value $conteudo
     Write-Host  'MERGED copiado.' -ForegroundColor Green
+    mostrarLogo;
     Start-Sleep -Milliseconds 400
-    Exit  
+    Exit
 }
 
 function espaco {
     #Descricao= Procura por espacos vazios no cadastro de sa�da.
-    $conteudo = Get-Content -path "S:\SERVICOS -TECNICOS\INTEGRACAO_CONSULTORIA\NFSE\PROCURAR ESPACOS CADASTRO SAIDA.txt" -Raw -Encoding UTF8
+    $conteudo = Get-Content -path "scripts\PROCURAR ESPACOS CADASTRO SAIDA.txt" -Raw -Encoding UTF8
     Set-Clipboard -value $conteudo
-    Write-Host  'VERIFICAR ESPACO copiado.' -ForegroundColor Green 
+    Write-Host  'VERIFICAR ESPACO copiado.' -ForegroundColor Green
+    mostrarLogo;
     Start-Sleep -Milliseconds 400
-    Exit  
+    Exit
 }
 
 function cloud {
     #Descricao= Link do repositorio na cloud para import.
     Set-Clipboard -value 'https://cloud.mv.com.br/index.php/s/7WRnvOtf2VrRac4'
-    Write-Host  'LINK CLOUD copiado.' -ForegroundColor Green 
+    Write-Host  'LINK CLOUD copiado.' -ForegroundColor Green
+    mostrarLogo;
     Start-Sleep -Milliseconds 400
-    Exit 
+    Exit
 }
 function tributo {
     #Descricao= Select nos tributos da nota.
-    $conteudo = Get-Content -path "S:\SERVICOS -TECNICOS\INTEGRACAO_CONSULTORIA\NFSE\cTRIBUTO.txt" -Raw -Encoding UTF8
+    $conteudo = Get-Content -path "scripts\cTRIBUTO.txt" -Raw -Encoding UTF8
     Set-Clipboard -value $conteudo
-    Write-Host  'TRIBUTO copiado.' -ForegroundColor Green    
+    Write-Host  'TRIBUTO copiado.' -ForegroundColor Green
+    mostrarLogo;
     Start-Sleep -Milliseconds 400
-    Exit      
+    Exit
 }
 
 
 class Funcao {
     [string]$Nome
-    [string]$Descricao    
+    [string]$Descricao
 }
 class Status {
     [string]$cd
     [string]$descricao
 }
 
-function condicoes {
-    #Descricao= Condições de envio.  
+function execucao {
+    #Descricao= Condições de execucao.
     class CondicaoEnvio {
         [string]$empresa
         [string]$coluna
         [string]$condicao
-        [string]$valor   
+        [string]$valor
     }
-    
+
     $envio = @(
         [CondicaoEnvio]@{empresa = '1'  ; coluna = 'CD_STATUS'; condicao = 'Igual a' ; valor = 'E' },
         [CondicaoEnvio]@{empresa = '1'  ; coluna = 'CD_STATUS_NFE'; condicao = 'Igual a' ; valor = 'A' },
         [CondicaoEnvio]@{empresa = '1'  ; coluna = 'CD_MULTI_EMPRESA'; condicao = 'Igual a' ; valor = '1' }
     )
-    
-    $consulta = @(        
+
+    $consulta = @(
         [CondicaoEnvio]@{empresa = '1'  ; coluna = 'CD_STATUS_NFE'; condicao = 'Igual a' ; valor = 'T' },
         [CondicaoEnvio]@{empresa = '1'  ; coluna = 'CD_MULTI_EMPRESA'; condicao = 'Igual a' ; valor = '1' }
     )
-    
+
     $cancelamento = @(
         [CondicaoEnvio]@{empresa = '1'  ; coluna = 'CD_STATUS_NFE'; condicao = 'Igual a' ; valor = 'C' },
         [CondicaoEnvio]@{empresa = '1'  ; coluna = 'CD_MULTI_EMPRESA'; condicao = 'Igual a' ; valor = '1' }
@@ -179,9 +197,9 @@ function condicoes {
 
 function func {
     #Descricao= Catálogo de funções no powerShell.
-    $listaFuncoes = @()     
-    $caminhoArquivo = "C:\Users\lucas.matheus\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1" 
-    
+    $listaFuncoes = @()
+    $caminhoArquivo = "C:\Users\lucas.matheus\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+
     $conteudo = Get-Content -Path $caminhoArquivo -Raw -Encoding UTF8
 
     $indicesFunction = @()
@@ -194,40 +212,41 @@ function func {
     foreach ($indiceFunction in $indicesFunction) {
         try {
             $substring = $conteudo.Substring($indiceFunction)
-       
-            $palavrasSubsequentes = $substring -split '\s+' | Select-Object -Skip 1  
+
+            $palavrasSubsequentes = $substring -split '\s+' | Select-Object -Skip 1
             if ( $palavrasSubsequentes[1] -eq '{') {
-                $nome = $palavrasSubsequentes[0]
+             #   $nome = $palavrasSubsequentes[0]
                 $substring = $substring -split "`r`n"
                 $descricao = $substring | Where-Object { $_ -match '#Descricao=' } | Select-Object -First 1 | ForEach-Object { $_ -replace '#Descricao=' }
-            }       
-        
-            if (($listaFuncoes | Where-Object { $_.Descricao -eq $descricao.Trim() }).Count -eq 0 ) {               
-                $listaFuncoes += [Funcao]@{Nome = $palavrasSubsequentes[0]; Descricao = $descricao.Trim() } 
+            }
+
+            if (($listaFuncoes | Where-Object { $_.Descricao -eq $descricao.Trim() }).Count -eq 0 ) {
+                $listaFuncoes += [Funcao]@{Nome = $palavrasSubsequentes[0]; Descricao = $descricao.Trim() }
             }
         }
         catch {
-            
-        }             
-    }    
-    $listaFuncoes | Format-Table -AutoSize    
-   
+
+        }
+    }
+    $listaFuncoes | Format-Table -AutoSize
+
     do {
         $escolhaFuncao = Read-Host "Qual funcao deseja escolher "
-        #Split para dar suporte a funçõe com argumentos, ele vai procurar pelo nome da função que vem antes do ' '. 
-        if ($listaFuncoes.Nome -contains $escolhaFuncao.Split(' ')[0]) {            
+        #Split para dar suporte a funçõe com argumentos, ele vai procurar pelo nome da função que vem antes do ' '.
+        if ($listaFuncoes.Nome -contains $escolhaFuncao.Split(' ')[0]) {
             Invoke-Expression "$escolhaFuncao"
         }
         elseif ($escolhaFuncao -eq "") {
             Write-host 'Saindo...'
+            mostrarLogo;
             Start-Sleep -Milliseconds 400
-            Exit  
+            Exit
         }
         else {
-            Write-Host $escolhaFuncao "nao e uma funcao valida. Tente novamente"  -ForegroundColor Red             
-        }   
+            Write-Host $escolhaFuncao "nao e uma funcao valida. Tente novamente"  -ForegroundColor Red
+        }
     } while ($listaFuncoes.Nome -notcontains $escolhaFuncao)
-    
+
 }
 
 function status {
@@ -253,7 +272,7 @@ function status {
              Não implementados ainda (NÃO SEI SE DE FATO NÃO FOI IMPLEMENTADO)
                       ----------------------------------------------------------
 
-                       5|RPS em processo de conversão para NFe                     
+                       5|RPS em processo de conversão para NFe
                       14|Solicitando inutilização de numeração de nota
                       15|Falha ao processar inutilização de numeração de nota
                       16|NFe substituída
@@ -277,8 +296,8 @@ function status {
 
     $lista = @([Status]@{cd = ' ' ; descricao = ' ' })
 
-    # Write-host  -NoNewline   
-    $lista, '------- CD_TIPO_SITUACAO_NOTA_FISCAL|DS_SITUACAO_NOTA_FISCAL -------' , $listaStatus1, '------- CD_STATUS_NFE -------', $listaStatusNfe | format-table -AutoSize 
+    # Write-host  -NoNewline
+    $lista, '------- CD_TIPO_SITUACAO_NOTA_FISCAL|DS_SITUACAO_NOTA_FISCAL -------' , $listaStatus1, '------- CD_STATUS_NFE -------', $listaStatusNfe | format-table -AutoSize
 }
 
 function c {
@@ -286,23 +305,24 @@ function c {
     param(
         [string]$inputNamePasta
     )
-    $previneLoop = 0    
+    $previneLoop = 0
     $caminho = 'C:\Users\lucas.matheus\Desktop\Clientes'
 
     do {
         $pastasEncontradas = Get-ChildItem -Path $caminho -Directory | Where-Object { $_.Name.ToUpper() -like "*$inputNamePasta*".ToUpper() }
-    
+
         if ($inputNamePasta -ne "") {
             if ($pastasEncontradas.Count -eq 0) {
                 #Criar nova pasta
-                Write-Host "Nova pasta criada... " $inputNamePasta -ForegroundColor Green       
+                Write-Host "Nova pasta criada... " $inputNamePasta -ForegroundColor Green
                 New-Item -ItemType Directory -Path "$caminho\$inputNamePasta" -Force
                 Start-Process explorer.exe -ArgumentList "$caminho\$inputNamePasta"
+                mostrarLogo;
                 Start-Sleep -Milliseconds 400
-                Exit            
+                Exit
             }
             elseif ($pastasEncontradas.Count -eq 1) {
-                #abre a pasta     
+                #abre a pasta
                 Start-Process explorer.exe -ArgumentList "$caminho\$pastasEncontradas"
                 Exit
             }
@@ -317,7 +337,27 @@ function c {
             Start-Process explorer.exe -ArgumentList 'C:\Users\lucas.matheus\Desktop\Clientes\'
             Exit
         }
-        $previneLoop++;          
+        $previneLoop++;
     }while ( $previneLoop -lt 5 )
     Exit
+}
+
+function mostrarLogo {
+    #Descricao= Exibe a LOGO da MAVI
+    write-host "
+              ::::::::::::::::::   :
+            ^J555555555555555555: :P5?~:
+            ?P555555555555555555: :GGGGPY?~:
+            :755555555?!!777777!   YGGGGGGGPY?~:
+              :7Y55555Y7:           :!J5GGGGGGGPY7~:
+                :7Y5555557:             ^7YPGGGGGGGPY7^
+                   !Y555555?                ^7YGGGGGGGG7
+                   ^J555555Y:               ^7YGGGGGGGG7
+                 ~J555555J~             :!JPGGGGGGGPY7^
+               ~J555555?^            ^7YGGGGGGGG5?~:
+             ~J5555555?~~~~~~~~~   JPGGGGGGG5J!:
+            75555555555555555555:  PGGGGPJ!^
+            ~Y555555555555555555:  PPY7^
+             :^~~~~~~~~~~~~~~~~~   ^
+"
 }
