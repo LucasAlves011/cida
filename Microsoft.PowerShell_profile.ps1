@@ -1,3 +1,9 @@
+$CAMINHO_BASE = $PSScriptRoot 
+
+function p {
+    write-host $PSScriptRoot   
+}
+
 function a {
     #Descricao= Seleciona cd_status,cd_status_nfe da tabela do produto.
     mostrarMensagemPadrao 'SELECT A copiado.' 'select cd_status,cd_status_nfe,a.* from dbamv.nota_fiscal a order by cd_nota_fiscal desc;'
@@ -10,74 +16,73 @@ function b {
 
 function cons {
     #Descricao= Chama integração para CONSULTA.
-    # $conteudo = Get-Content -path "scripts\CONSULTA - CHAMAR INTEGRACAO.txt"
-    $conteudo = Get-Content -path "scripts\CONSULTA - CHAMAR INTEGRACAO.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\CONSULTA - CHAMAR INTEGRACAO.txt"
     mostrarMensagemPadrao  'CONSULTA copiado.' $conteudo
 }
 
 function env {
     #Descricao= Chama integração para ENVIO.
-    $conteudo = Get-Content -path "scripts\ENVIO - CHAMAR INTEGRACAO.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\ENVIO - CHAMAR INTEGRACAO.txt"
     mostrarMensagemPadrao  'ENVIO copiado.' $conteudo
 }
 
 function can {
     #Descricao= Chama integração para CANCELAMENTO.
-    $conteudo = Get-Content -path "scripts\CANCELAMENTO - CHAMAR INTEGRACAO.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\CANCELAMENTO - CHAMAR INTEGRACAO.txt"
     mostrarMensagemPadrao  'CANCELAMENTO copiado.' $conteudo
 }
 
 function contar {
     #Descricao= Conta quantas notas estão em status A nas tabelas MVINTEGRA.
-    $conteudo = Get-Content -path "scripts\CONTAR AGUARDANDO.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\CONTAR AGUARDANDO.txt"
     mostrarMensagemPadrao  'CONTAR copiado.' $conteudo
 }
 
 function erro {
     #Descricao= Seta notas para erro na tabela do produto.
-    $conteudo = Get-Content -path "scripts\SETAR ERRO.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\SETAR ERRO.txt"
     mostrarMensagemPadrao  'ERRO copiado.' $conteudo
 }
 
 function monta {
     #Descricao= Monta TRIGGERS e PROCEDURES.
-    $conteudo = Get-Content -path "scripts\Script Monta Trigger e procedure.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\Script Monta Trigger e procedure.txt"
     mostrarMensagemPadrao  'MONTA copiado.' $conteudo
 }
 
 function drop {
     #Descricao= Dropa pontos de integração.
-    $conteudo = Get-Content -path "scripts\DROP_PONTOS_INTEGRA_NFSE.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\DROP_PONTOS_INTEGRA_NFSE.txt"
     mostrarMensagemPadrao  'DROP copiado.' $conteudo
 }
 
 function monitora {
     #Descricao= Cria tabela e triggers para monitora tomcats.
-    $conteudo = Get-Content -path "scripts\CRIA TABELA E TRIGGER PARA MONITORAR OS TOMCATS.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\CRIA TABELA E TRIGGER PARA MONITORAR OS TOMCATS.txt"
     mostrarMensagemPadrao 'MONITORA copiado.' $conteudo
 }
 
 function condicoes {
     #Descricao= Chama integração para consulta.
-    $conteudo = Get-Content -path "scripts\preenche_condicoes_envio_all_v5.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\preenche_condicoes_envio_all_v5.txt"
     mostrarMensagemPadrao 'CONDICOES copiado.' $conteudo
 }
 
 function verificaxml {
     #Descricao= Verifica XML padrão.
-    $conteudo = Get-Content -path "scripts\VERIFICAR XML PADRAO.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\VERIFICAR XML PADRAO.txt"
     mostrarMensagemPadrao  'VERIFICA XML copiado.' $conteudo
 }
 
 function merged {
     #Descricao= Merged script.
-    $conteudo = Get-Content -path "scripts\merged-nfse-scripts.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\merged-nfse-scripts.txt"
     mostrarMensagemPadrao 'MERGED copiado.'  $conteudo
 }
 
 function espaco {
     #Descricao= Procura por espacos vazios no cadastro de sa�da.
-    $conteudo = Get-Content -path "scripts\PROCURAR ESPACOS CADASTRO SAIDA.txt" -Raw -Encoding UTF8
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\PROCURAR ESPACOS CADASTRO SAIDA.txt" -Raw -Encoding UTF8
     mostrarMensagemPadrao 'VERIFICAR ESPACO copiado.' $conteudo
 }
 
@@ -88,8 +93,15 @@ function cloud {
 
 function tributo {
     #Descricao= Select nos tributos da nota.
-    $conteudo = Get-Content -path "scripts\cTRIBUTO.txt" -Raw -Encoding UTF8
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\cTRIBUTO.txt" -Raw -Encoding UTF8
     mostrarMensagemPadrao 'TRIBUTO copiado.' $conteudo
+}
+
+function saida {
+    #Descricao= Parametros cadastro de saida.
+    mostrarMensagemPadrao  'SELECT SAIDA copiado.' "SELECT b.CD_SISTEMA_DESTINO,b.ds_saida,a.* FROM mvintegra.imv_configuracao_saida_param a 
+    INNER JOIN mvintegra.imv_configuracao_saida b ON a.cd_imv_configuracao_saida = b.cd_imv_configuracao_saida 
+    WHERE (b.ds_saida like ('%RPS%') OR b.ds_saida LIKE ('%NFSE%'))"
 }
 
 class Funcao {
@@ -132,7 +144,7 @@ function execucao {
 function func {
     #Descricao= Catálogo de funções no powerShell.
     $listaFuncoes = @()
-    $caminhoArquivo = "C:\Users\lucas.matheus\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+    $caminhoArquivo = "$CAMINHO_BASE\Microsoft.PowerShell_profile.ps1"
 
     $conteudo = Get-Content -Path $caminhoArquivo -Raw -Encoding UTF8
 
@@ -274,7 +286,7 @@ function c {
 function mostrarMensagemPadrao {
     param (
         [string]$mensagem,
-        [string]$conteudo
+        [string]$conteudo        
     )
 
     if ($conteudo -ne $null) {
@@ -282,8 +294,9 @@ function mostrarMensagemPadrao {
     }
 
     if ($mensagem -ne $null) {
-        Write-Host $mensagem -ForegroundColor Green
-    }
+        printCentralizado $mensagem 'Green'
+    }    
+
     write-host "
               ::::::::::::::::::   :
             ^J555555555555555555: :P5?~:
@@ -300,6 +313,18 @@ function mostrarMensagemPadrao {
             ~Y555555555555555555:  PPY7^
              :^~~~~~~~~~~~~~~~~~   ^
 "
-    Start-Sleep -Milliseconds 400
-    Exit
+    Start-Sleep -Milliseconds 500
+    #Exit
+}
+
+function printCentralizado {
+    param (
+        [string]$Texto,
+        [string]$Cor
+    )
+    $larguraDaJanela = $Host.UI.RawUI.WindowSize.Width
+    $espacosAntes = ($larguraDaJanela - $Texto.Length) / 2
+    $espacosDepois = $larguraDaJanela - $Texto.Length - $espacosAntes
+    $textoCentralizado = (" " * $espacosAntes) + $Texto + (" " * $espacosDepois)
+    Write-Host $textoCentralizado -ForegroundColor $Cor
 }
