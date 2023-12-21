@@ -1,7 +1,14 @@
-$CAMINHO_BASE = $PSScriptRoot 
+."$PSScriptRoot/utilitarios.ps1" #Import de utilitarios
 
-function p {
-    write-host $PSScriptRoot   
+$CAMINHO_BASE = $PSScriptRoot #Caminho da pasta onde este script roda
+
+class Funcao {
+    [string]$Nome
+    [string]$Descricao
+}
+class Status {
+    [string]$cd
+    [string]$descricao
 }
 
 function a {
@@ -16,67 +23,67 @@ function b {
 
 function cons {
     #Descricao= Chama integração para CONSULTA.
-    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\CONSULTA - CHAMAR INTEGRACAO.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\CONSULTA - CHAMAR INTEGRACAO.txt" -Raw -Encoding UTF8
     mostrarMensagemPadrao  'CONSULTA copiado.' $conteudo
 }
 
 function env {
     #Descricao= Chama integração para ENVIO.
-    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\ENVIO - CHAMAR INTEGRACAO.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\ENVIO - CHAMAR INTEGRACAO.txt" -Raw -Encoding UTF8
     mostrarMensagemPadrao  'ENVIO copiado.' $conteudo
 }
 
 function can {
     #Descricao= Chama integração para CANCELAMENTO.
-    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\CANCELAMENTO - CHAMAR INTEGRACAO.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\CANCELAMENTO - CHAMAR INTEGRACAO.txt" -Raw -Encoding UTF8
     mostrarMensagemPadrao  'CANCELAMENTO copiado.' $conteudo
 }
 
 function contar {
     #Descricao= Conta quantas notas estão em status A nas tabelas MVINTEGRA.
-    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\CONTAR AGUARDANDO.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\CONTAR AGUARDANDO.sql" -Raw -Encoding UTF8
     mostrarMensagemPadrao  'CONTAR copiado.' $conteudo
 }
 
 function erro {
     #Descricao= Seta notas para erro na tabela do produto.
-    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\SETAR ERRO.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\SETAR ERRO.txt" -Raw -Encoding UTF8
     mostrarMensagemPadrao  'ERRO copiado.' $conteudo
 }
 
 function monta {
     #Descricao= Monta TRIGGERS e PROCEDURES.
-    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\Script Monta Trigger e procedure.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\Script Monta Trigger e procedure.txt" -Raw -Encoding UTF8
     mostrarMensagemPadrao  'MONTA copiado.' $conteudo
 }
 
 function drop {
     #Descricao= Dropa pontos de integração.
-    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\DROP_PONTOS_INTEGRA_NFSE.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\DROP_PONTOS_INTEGRA_NFSE.txt" -Raw -Encoding UTF8
     mostrarMensagemPadrao  'DROP copiado.' $conteudo
 }
 
 function monitora {
     #Descricao= Cria tabela e triggers para monitora tomcats.
-    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\CRIA TABELA E TRIGGER PARA MONITORAR OS TOMCATS.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\CRIA TABELA E TRIGGER PARA MONITORAR OS TOMCATS.txt" -Raw -Encoding UTF8
     mostrarMensagemPadrao 'MONITORA copiado.' $conteudo
 }
 
 function condicoes {
     #Descricao= Chama integração para consulta.
-    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\preenche_condicoes_envio_all_v5.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\preenche_condicoes_envio_all_v5.txt" -Raw -Encoding UTF8
     mostrarMensagemPadrao 'CONDICOES copiado.' $conteudo
 }
 
 function verificaxml {
     #Descricao= Verifica XML padrão.
-    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\VERIFICAR XML PADRAO.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\VERIFICAR XML PADRAO.txt" -Raw -Encoding UTF8
     mostrarMensagemPadrao  'VERIFICA XML copiado.' $conteudo
 }
 
 function merged {
     #Descricao= Merged script.
-    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\merged-nfse-scripts.txt"
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\merged-nfse-scripts.txt" -Raw -Encoding UTF8
     mostrarMensagemPadrao 'MERGED copiado.'  $conteudo
 }
 
@@ -97,20 +104,22 @@ function tributo {
     mostrarMensagemPadrao 'TRIBUTO copiado.' $conteudo
 }
 
+function excluirxmlp {
+    #Descricao= Excluir xml padrão.
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\EXCLUIR XML PADRAO.txt" -Raw -Encoding UTF8
+    mostrarMensagemPadrao 'EXCLUIR XML PADRAO copiado.' $conteudo
+}
+
 function saida {
     #Descricao= Parametros cadastro de saida.
-    mostrarMensagemPadrao  'SELECT SAIDA copiado.' "SELECT b.CD_SISTEMA_DESTINO,b.ds_saida,a.* FROM mvintegra.imv_configuracao_saida_param a 
+    mostrarMensagemPadrao  'SELECT SAIDA copiado.' "SELECT b.cd_empresa_destino,b.CD_SISTEMA_DESTINO,b.ds_saida,a.* FROM mvintegra.imv_configuracao_saida_param a 
     INNER JOIN mvintegra.imv_configuracao_saida b ON a.cd_imv_configuracao_saida = b.cd_imv_configuracao_saida 
     WHERE (b.ds_saida like ('%RPS%') OR b.ds_saida LIKE ('%NFSE%'))"
 }
 
-class Funcao {
-    [string]$Nome
-    [string]$Descricao
-}
-class Status {
-    [string]$cd
-    [string]$descricao
+function url {
+    #Descricao= Parametros cadastro de saida.
+    mostrarMensagemPadrao 'Procurar a url no sistema APOIO, não use o PEP' 'select * from dbasgu.produto_sistema' -tempoFechamento 1000 -corTexto 'Red'
 }
 
 function execucao {
@@ -139,57 +148,6 @@ function execucao {
         [CondicaoEnvio]@{empresa = '1'  ; coluna = 'CD_TIPO_SITUACAO_NOTA_FISCAL'; condicao = 'Igual a' ; valor = '11' }
     )
     $envio , '--------------------- Consulta ---------------------' , $consulta, '------------------- Cancelamento -------------------', $cancelamento | Format-Table -AutoSize
-}
-
-function func {
-    #Descricao= Catálogo de funções no powerShell.
-    $listaFuncoes = @()
-    $caminhoArquivo = "$CAMINHO_BASE\Microsoft.PowerShell_profile.ps1"
-
-    $conteudo = Get-Content -Path $caminhoArquivo -Raw -Encoding UTF8
-
-    $indicesFunction = @()
-    $indice = $conteudo.IndexOf("function")
-
-    while ($indice -ne -1) {
-        $indicesFunction += $indice
-        $indice = $conteudo.IndexOf("function", $indice + 1)
-    }
-    foreach ($indiceFunction in $indicesFunction) {
-        try {
-            $substring = $conteudo.Substring($indiceFunction)
-
-            $palavrasSubsequentes = $substring -split '\s+' | Select-Object -Skip 1
-            if ( $palavrasSubsequentes[1] -eq '{') {
-             #   $nome = $palavrasSubsequentes[0]
-                $substring = $substring -split "`r`n"
-                $descricao = $substring | Where-Object { $_ -match '#Descricao=' } | Select-Object -First 1 | ForEach-Object { $_ -replace '#Descricao=' }
-            }
-
-            if (($listaFuncoes | Where-Object { $_.Descricao -eq $descricao.Trim() }).Count -eq 0 ) {
-                $listaFuncoes += [Funcao]@{Nome = $palavrasSubsequentes[0]; Descricao = $descricao.Trim() }
-            }
-        }
-        catch {
-
-        }
-    }
-    $listaFuncoes | Format-Table -AutoSize
-
-    do {
-        $escolhaFuncao = Read-Host "Qual funcao deseja escolher "
-        #Split para dar suporte a funçõe com argumentos, ele vai procurar pelo nome da função que vem antes do ' '.
-        if ($listaFuncoes.Nome -contains $escolhaFuncao.Split(' ')[0]) {
-            Invoke-Expression "$escolhaFuncao"
-        }
-        elseif ($escolhaFuncao -eq "") {
-            mostrarMensagemPadrao 'Saindo...' $null
-        }
-        else {
-            Write-Host $escolhaFuncao "nao e uma funcao valida. Tente novamente"  -ForegroundColor Red
-        }
-    } while ($listaFuncoes.Nome -notcontains $escolhaFuncao)
-
 }
 
 function status {
@@ -239,92 +197,5 @@ function status {
 
     $lista = @([Status]@{cd = ' ' ; descricao = ' ' })
 
-    # Write-host  -NoNewline
-    $lista, '------- CD_TIPO_SITUACAO_NOTA_FISCAL|DS_SITUACAO_NOTA_FISCAL -------' , $listaStatus1, '------- CD_STATUS_NFE -------', $listaStatusNfe | format-table -AutoSize
-}
-
-function c {
-    #Descricao= Utilitario de pastas
-    param(
-        [string]$inputNamePasta
-    )
-    $previneLoop = 0
-    $caminho = 'C:\Users\lucas.matheus\Desktop\Clientes'
-
-    do {
-        $pastasEncontradas = Get-ChildItem -Path $caminho -Directory | Where-Object { $_.Name.ToUpper() -like "*$inputNamePasta*".ToUpper() }
-
-        if ($inputNamePasta -ne "") {
-            if ($pastasEncontradas.Count -eq 0) {
-                #Criar nova pasta
-                Write-Host "Nova pasta criada... " $inputNamePasta -ForegroundColor Green
-                New-Item -ItemType Directory -Path "$caminho\$inputNamePasta" -Force
-                Start-Process explorer.exe -ArgumentList "$caminho\$inputNamePasta"
-                mostrarMensagemPadrao $null $null
-            }
-            elseif ($pastasEncontradas.Count -eq 1) {
-                #abre a pasta
-                Start-Process explorer.exe -ArgumentList "$caminho\$pastasEncontradas"
-                Exit
-            }
-            else {
-                #Várias pastas foram encontradas
-                $pastasEncontradas | Format-Table -AutoSize
-                $inputNamePasta = Read-Host  "Varias pastas foram encontradas, seja mais especifico. Digite o nome de uma pasta "
-            }
-        }
-        else {
-            #abrir a pasta clientes
-            Start-Process explorer.exe -ArgumentList 'C:\Users\lucas.matheus\Desktop\Clientes\'
-            Exit
-        }
-        $previneLoop++;
-    }while ( $previneLoop -lt 5 )
-    Exit
-}
-
-function mostrarMensagemPadrao {
-    param (
-        [string]$mensagem,
-        [string]$conteudo        
-    )
-
-    if ($conteudo -ne $null) {
-        Set-Clipboard -value $conteudo
-    }
-
-    if ($mensagem -ne $null) {
-        printCentralizado $mensagem 'Green'
-    }    
-
-    write-host "
-              ::::::::::::::::::   :
-            ^J555555555555555555: :P5?~:
-            ?P555555555555555555: :GGGGPY?~:
-            :755555555?!!777777!   YGGGGGGGPY?~:
-              :7Y55555Y7:           :!J5GGGGGGGPY7~:
-                :7Y5555557:             ^7YPGGGGGGGPY7^
-                   !Y555555?                ^7YGGGGGGGG7
-                   ^J555555Y:               ^7YGGGGGGGG7
-                 ~J555555J~             :!JPGGGGGGGPY7^
-               ~J555555?^            ^7YGGGGGGGG5?~:
-             ~J5555555?~~~~~~~~~   JPGGGGGGG5J!:
-            75555555555555555555:  PGGGGPJ!^
-            ~Y555555555555555555:  PPY7^
-             :^~~~~~~~~~~~~~~~~~   ^
-"
-    Start-Sleep -Milliseconds 500
-    #Exit
-}
-
-function printCentralizado {
-    param (
-        [string]$Texto,
-        [string]$Cor
-    )
-    $larguraDaJanela = $Host.UI.RawUI.WindowSize.Width
-    $espacosAntes = ($larguraDaJanela - $Texto.Length) / 2
-    $espacosDepois = $larguraDaJanela - $Texto.Length - $espacosAntes
-    $textoCentralizado = (" " * $espacosAntes) + $Texto + (" " * $espacosDepois)
-    Write-Host $textoCentralizado -ForegroundColor $Cor
+    $lista, '------- CD_TIPO_SITUACAO_NOTA_FISCAL|DS_SITUACAO_NOTA_FISCAL -------', $listaStatus1, '------- CD_STATUS_NFE -------', $listaStatusNfe | format-table -AutoSize
 }

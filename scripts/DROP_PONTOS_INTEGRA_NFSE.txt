@@ -31,7 +31,7 @@ BEGIN
                                                WHERE i.cd_imv_configuracao_entid_xml = r.cd_imv_configuracao_entid_xml AND i.cd_processo_integracao = pcd_processo_integracao);
 
    DELETE FROM mvintegra.imv_config_entid_xml_proc_intg i
-         WHERE i.cd_processo_integracao = pcd_processo_integracao;
+         WHERE i.cd_processo_integracao = pcd_processo_integracao; 
 
    DELETE FROM mvintegra.condicao_execucao i
          WHERE i.cd_processo_integracao = pcd_processo_integracao;

@@ -1,0 +1,60 @@
+                    
+DECLARE             
+
+  CURSOR id_entidade_a_deletar(p_ds_integracao VARCHAR2, p_tp_fluxo VARCHAR2)
+  IS
+  SELECT cd_imv_configuracao_entid_xml, ds_integracao
+  FROM mvintegra.imv_configuracao_entidade_xml
+  WHERE ds_integracao = (p_ds_integracao)
+  AND tp_fluxo = p_tp_fluxo ;   
+
+  v_ds_integracao VARCHAR2(500) := 'CANCELAMENTO_RPS_MVS';
+  v_tp_fluxo VARCHAR2(1) := 'S';
+  BEGIN
+
+  FOR r_id_entidade_a_deletar IN id_entidade_a_deletar(v_ds_integracao, v_tp_fluxo) LOOP
+  
+    DELETE
+    FROM mvintegra.imv_configuracao_saida_tp_doc
+    WHERE cd_imv_configuracao_entid_xml = r_id_entidade_a_deletar.cd_imv_configuracao_entid_xml;
+
+    DELETE
+    FROM mvintegra.imv_configuracaO_elemento_xml
+    WHERE cd_imv_configuracao_entid_xml = r_id_entidade_a_deletar.cd_imv_configuracao_entid_xml;
+
+
+
+    DELETE
+    FROM mvintegra.imv_configuracao_tip_intg_cnct
+    WHERE cd_imv_configuracao_entid_xml = r_id_entidade_a_deletar.cd_imv_configuracao_entid_xml;
+
+
+
+    DELETE
+    FROM mvintegra.imv_configuracao_funcao_conec
+    WHERE cd_imv_configuracao_entid_xml = r_id_entidade_a_deletar.cd_imv_configuracao_entid_xml;
+
+
+
+    DELETE
+    FROM mvintegra.imv_configuracao_requisicao
+    WHERE cd_imv_configuracao_entid_xml = r_id_entidade_a_deletar.cd_imv_configuracao_entid_xml;
+
+    DELETE
+    FROM mvintegra.imv_config_entid_xml_proc_intg
+    WHERE cd_imv_configuracao_entid_xml = r_id_entidade_a_deletar.cd_imv_configuracao_entid_xml;
+
+    DELETE
+    FROM mvintegra.imv_configuracao_entidade_xml
+    WHERE cd_imv_ConfiguracaO_entid_xml = r_id_entidade_a_deletar.cd_imv_configuracao_entid_xml;
+
+
+
+  Dbms_Output.Put_Line('ID exlcluído : ' || r_id_entidade_a_deletar.cd_imv_configuracao_entid_xml || ' Integração : ' || r_id_entidade_a_deletar.ds_integracao);
+
+  END LOOP;
+
+  EXCEPTION
+  WHEN Others THEN
+    Dbms_Output.Put_Line(SQLERRM || Dbms_Utility.format_error_backtrace);
+END;
