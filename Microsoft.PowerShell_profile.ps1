@@ -118,7 +118,7 @@ function saida {
 }
 
 function url {
-    #Descricao= Parametros cadastro de saida.
+    #Descricao= Select da tabela sistemas, util para achar a url do soul.
     mostrarMensagemPadrao 'Procurar a url no sistema APOIO, não use o PEP' 'select * from dbasgu.produto_sistema' -tempoFechamento 1000 -corTexto 'Red'
 }
 
@@ -172,7 +172,6 @@ function status {
         #TODO: implementar isso depois
              Não implementados ainda (NÃO SEI SE DE FATO NÃO FOI IMPLEMENTADO)
                       ----------------------------------------------------------
-
                        5|RPS em processo de conversão para NFe
                       14|Solicitando inutilização de numeração de nota
                       15|Falha ao processar inutilização de numeração de nota
