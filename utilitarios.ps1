@@ -48,27 +48,27 @@ function mostrarMensagemPadrao {
         [string]$corTexto = 'Green'        
     )
     write-host  "
-    ::::::::::::::::::   :
-  ^J555555555555555555: :P5?~:
-  ?P555555555555555555: :GGGGPY?~:
-  :755555555?!!777777!   YGGGGGGGPY?~:
-    :7Y55555Y7:           :!J5GGGGGGGPY7~:
-      :7Y5555557:             ^7YPGGGGGGGPY7^
-         !Y555555?                ^7YGGGGGGGG7
-         ^J555555Y:               ^7YGGGGGGGG7
-       ~J555555J~             :!JPGGGGGGGPY7^
-     ~J555555?^            ^7YGGGGGGGG5?~:
-   ~J5555555?~~~~~~~~~   JPGGGGGGG5J!:
-  75555555555555555555:  PGGGGPJ!^
-  ~Y555555555555555555:  PPY7^
-   :^~~~~~~~~~~~~~~~~~   ^
+                                        ::::::::::::::::::   :
+                                    ^J555555555555555555: :P5?~:
+                                    ?P555555555555555555: :GGGGPY?~:
+                                    :755555555?!!777777!   YGGGGGGGPY?~:
+                                        :7Y55555Y7:           :!J5GGGGGGGPY7~:
+                                        :7Y5555557:             ^7YPGGGGGGGPY7^
+                                            !Y555555?                ^7YGGGGGGGG7
+                                            ^J555555Y:               ^7YGGGGGGGG7
+                                        ~J555555J~             :!JPGGGGGGGPY7^
+                                        ~J555555?^            ^7YGGGGGGGG5?~:
+                                    ~J5555555?~~~~~~~~~   JPGGGGGGG5J!:
+                                    75555555555555555555:  PGGGGPJ!^
+                                    ~Y555555555555555555:  PPY7^
+                                    :^~~~~~~~~~~~~~~~~~   ^
 "
 
-    if ($conteudo -ne $null) {
+    if ($conteudo -ne $null -and $conteudo -ne '') {
         Set-Clipboard -value $conteudo
     }
 
-    if ($mensagem -ne $null) {
+    if ($mensagem -ne $null -and $mensagem -ne '') {
         printCentralizado $mensagem $corTexto
     }
   
