@@ -122,6 +122,36 @@ function url {
     mostrarMensagemPadrao 'Procurar a url no sistema APOIO, não use o PEP' 'select * from dbasgu.produto_sistema' -tempoFechamento 1000 -corTexto 'Red'
 }
 
+function cdenvio {
+    #Descricao= Select da condicoes de envio.
+	$conteudo =  Get-Content -path "$CAMINHO_BASE/scripts\SELECT CONDICOES DE ENVIO.txt" -Raw -Encoding UTF8 
+    mostrarMensagemPadrao 'SELECT CONDICOES ENVIO copiado' $conteudo -tempoFechamento 1000 -corTexto 'Green'
+}
+
+function user {
+    #Descricao= Seleciona usuarios.
+    mostrarMensagemPadrao 'SELECT USUARIOS copiado.' 'SELECT * FROM dbasgu.usuarios;'
+}
+
+function jconsole {
+    #Descricao= Seleciona usuarios.
+    mostrarMensagemPadrao 'SELECT JCONSOLE copiado.' '-Dcom.sun.management.jmxremote
+    -Dcom.sun.management.jmxremote.port=7143
+    -Dcom.sun.management.jmxremote.ssl=false
+    -Dcom.sun.management.jmxremote.authenticate=false' -corTexto 'Blue'
+}
+
+function questionario {
+    #Descricao= Seleciona questionario de NFSE.
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\QUESTIONARIO_NFSE.txt" -Raw -Encoding UTF8
+    mostrarMensagemPadrao 'QUESTIONARIO NFSE copiado.' $conteudo
+}
+
+function senha {
+    #Descricao= Seleciona senha do gerador de senha.
+    mostrarMensagemPadrao 'SENHA copiada.' '*gcpgp!04'
+}
+
 function execucao {
     #Descricao= Condições de execucao.
     class CondicaoEnvio {

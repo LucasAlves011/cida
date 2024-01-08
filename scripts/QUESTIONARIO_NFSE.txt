@@ -1,0 +1,93 @@
+
+Prezado cliente, para darmos início ao atendimento se faz necessário responder algumas perguntas e disponibilizar alguns arquivos.
+
+1 - Qual a prefeitura?
+
+Exemplo: Passo Fundo/RS
+
+2 - Qual o tipo de comunicação com a prefeitura?
+
+Exemplo: Webservice
+
+3 - Prefeitura possui ambiente de simulação?
+
+Opções: [Sim; Não]
+
+4 - Quais os endpoints de simulação e produção da prefeitura?
+
+Exemplo: Simulação: http://nfsehomologacao.pmpf.rs.gov.br/thema-nfse/services/NFSEremessa?wsdl 
+
+                Produção: https://nfse.pmpf.rs.gov.br/thema-nfse/services/NFSEremessa?wsdl
+
+5 - Possui certificado digital tipo A1 (e-CNPJ / NF-e)?
+
+Opções: [Sim; Não]
+
+6 - Qual a senha do certificado digital?
+
+Exemplo: 1234
+
+7 - Possui ambiente de simulação (TRN e/ou SML) do MV atualizado? Qual versão?
+
+Exemplo: Treinamento: Sim. Soul na versão 2018.01.001 FTR
+
+                Simulação: Sim. Soul na versão 2018.01.001 FTR 
+
+8 - Possui integração de nota fiscal com a prefeitura no MV?
+
+Opções: [Sim; Não]
+
+9 - Possui tomcat de integração ou nota fiscal? Qual versão?
+
+Exemplo: Simulação: Sim. Tomcat de integração na versão 7
+
+                Produção: Sim. Tomcat de integração na versão 7
+
+10 - Possui os módulos de integração no MV2000 ou Soul? Qual?
+
+Opções: [Sim. MV 2000; Sim. Soul; Não]
+
+Exemplo: Simulação: Sim. MV 2000 
+
+                Produção: Sim. Soul
+
+11 - Os dados da empresa estão cadastrados na tela "Configurações de Nota Fiscal" (FFCV/M_CONFIG_NF) na aba "Dados da Empresa"?
+
+Opções: [Sim; Não]
+
+12 - O formulário da nota fiscal que será utilizado nessa integração está criado na tela "Formulário da Nota Fiscal" (FFCV/M_FORMULARIO_NF)?
+
+Opções: [Sim; Não]
+
+ 
+
+Arquivos que devem ser anexados ao chamado: 
+
+1 - Manual de integração com a prefeitura;
+
+2 - Exemplo de mensagem XML de todos os pontos existentes de integração com a prefeitura;
+
+3 - Certificado digital.
+
+ 
+
+Orientações:
+
+1 - Ambiente de simulação da prefeitura: Caso a prefeitura não possua ambiente de simulação, será necessário realizar os testes dessa integração do ambiente de simulação do MV para o ambiente de produção da prefeitura, com isso, sugerimos a criação do RPS no valor de R$ 0,01, para que seja realizada a emissão e cancelamento na prefeitura;
+
+2 - Certificado digital Tipo A1: Caso o hospital não possua certificado digital do tipo A1, será necessário verificar com a prefeitura se o mesmo será utilizado. Em caso positivo, será preciso que o hospital providencie o certificado;
+
+3 - Ambiente de simulação do MV: Caso o hospital não possua ambiente de simulação do MV atualizado (dump de produção, tomcat, módulos de integração etc), será necessário disponibilizá-lo, pois os testes de homologação se iniciarão nesse ambiente para posteriormente ser realizado em produção. Geralmente esse ambiente é denominado de TRN e/ou SML;
+
+4 - Tomcat: Caso o hospital não possua tomcat de integração ou nota fiscal na versão 7, será necessário providenciar essa instalação. Se a decisão do hospital for que a MV realize essa instalação, será preciso registrar um ticket de instalação;
+
+5 - Módulos de integração: Caso o hospital não possua os módulos de integração no MV2000 ou Soul nos ambientes de simulação e produção, será necessário providenciar essa instalação;
+
+6 - Dados da empresa: Caso os dados da empresa ainda não estejam preenchidos na tela "configurações de Nota Fiscal", será necessário que o hospital providencie esse preenchimento. Se for preciso auxilio da MV, o hospital deverá registrar um ticket solicitando apoio da equipe de faturamento do MV;
+
+7 - Formulário de nota fiscal: Caso o formulário de nota fiscal que será utilizado nessa integração ainda não esteja criado na tela "Formulário da Nota Fiscal", será necessário que o hospital providencie esse formulário. Se for preciso auxilio da MV, o hospital deverá registrar um ticket solicitando apoio da equipe de faturamento do MV;
+
+8 - Formalização da emissão de nota fiscal na prefeitura: Caso o hospital ainda não tenha manifestado na prefeitura o interesse de realizar a emissão de nota fiscal utilizando os serviços disponibilizados pela mesma, é necessário que o faça. Algumas prefeituras disponibilizam dados de acesso (usuário, senha etc) exclusivos para utilização desses serviços, inclusive algumas precisam realizar liberação do prestador em seus sistemas.
+
+Atenciosamente,
+Equipe de Integração - MV
