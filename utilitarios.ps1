@@ -43,8 +43,7 @@ function mostrarMensagemPadrao {
     param (
         [string]$mensagem,
         [string]$conteudo,
-        [int]$tempoFechamento = 500,
-        [bool]$fechaAutomatico = $true,
+        [int]$tempoFechamento = 500,       
         [string]$corTexto = 'Green'        
     )
     write-host  "
@@ -74,7 +73,7 @@ function mostrarMensagemPadrao {
   
     Start-Sleep -Milliseconds $tempoFechamento
     
-    if ($fechaAutomatico){
+    if ($tempoFechamento -gt 0){
         Exit
     }
 }

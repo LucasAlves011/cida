@@ -151,7 +151,14 @@ function senha {
     #Descricao= Seleciona senha do gerador de senha.
     mostrarMensagemPadrao 'SENHA copiada.' '*gcpgp!04'
 }
-
+<#
+function codemavi {
+    #Descricao= Abre o projeto mavi no VS Code.
+    mostrarMensagemPadrao 'Abrindo MAVI VS Code' '' -tempoFechamento 0
+    write-host $CAMINHO_BASE
+    Start-Process "C:\Users\lucas.matheus\AppData\Local\Programs\Microsoft VS Code\Code.exe" $CAMINHO_BASE 
+}
+#>
 function execucao {
     #Descricao= Condições de execucao.
     class CondicaoEnvio {
