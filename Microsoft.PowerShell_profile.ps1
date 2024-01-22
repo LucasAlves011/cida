@@ -1,4 +1,5 @@
 ."$PSScriptRoot/utilitarios.ps1" #Import de utilitarios
+."$PSScriptRoot/similaridade.ps1" #Import de similaridade de funcoes
 
 $CAMINHO_BASE = $PSScriptRoot #Caminho da pasta onde este script roda
 
@@ -150,6 +151,40 @@ function questionario {
 function senha {
     #Descricao= Seleciona senha do gerador de senha.
     mostrarMensagemPadrao 'SENHA copiada.' '*gcpgp!04'
+}
+
+function loop {
+    #Descricao= Seleciona condicoes envio.
+    param(
+        [string]$tipo
+    )
+    $previneLoop = 0
+
+    do {       
+        if ($tipo -eq  'env' -or $tipo -eq  'envio'){
+            mostrarMensagemPadrao 'Condicao que previne loop ENVIO copiado' "--Envio
+            IF ((NVL(pnew.cd_status, pold.cd_status) <> 'E') OR (NVL(pnew.cd_status_nfe, pold.cd_status_nfe) <> 'A')) OR
+                (((NVL(pnew.cd_status, '*')) = (NVL(pold.cd_status, '*'))) AND ((NVL(pnew.cd_status_nfe, '*')) = (NVL(pold.cd_status_nfe, '*')))) THEN
+            RETURN;
+            END IF;"
+        }elseif ($tipo -eq 'con' -or $tipo -eq 'cons' -or $tipo -eq 'consulta'){
+            mostrarMensagemPadrao 'Condicao que previne loop CONSULTA copiado' "--Consulta
+            IF ((NVL(pnew.cd_status_nfe, pold.cd_status_nfe) <> 'T')) OR
+            ((NVL(pnew.cd_status_nfe, '*')) = (NVL(pold.cd_status_nfe, '*'))) THEN
+            RETURN;
+            END IF;"
+        }elseif ($tipo -eq 'can' -or $tipo -eq 'canc' -or $tipo -eq 'cancelamento'){
+            mostrarMensagemPadrao 'Condicao que previne loop CANCELAMENTO copiado' "--cancelamento reduzido
+            IF ((NVL(pnew.cd_status_nfe, pold.cd_status_nfe) <> 'C') ) OR
+            (((NVL(pnew.cd_status_nfe, '*')) = (NVL(pold.cd_status_nfe, '*'))) )THEN
+            RETURN;
+        END IF;"
+        }else{
+            $tipo = Read-Host 'Qual deseja copiar? [env/cons/can]'             
+        }
+        $previneLoop++;
+    }while($previneLoop -lt 3)
+    mostrarMensagemPadrao 'Excedido o numero de tentativas' -corTexto 'Red' -tempoFechamento 2000
 }
 <#
 function codemavi {

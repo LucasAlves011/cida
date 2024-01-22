@@ -1,7 +1,8 @@
 function c {
     #Descricao= Utilitario de pastas.
     param(
-        [string]$inputNamePasta
+        [string]$inputNamePasta,
+        [string]$apenasPesquisar = 'sim'
     )
     $previneLoop = 0
     $caminho = 'C:\Users\lucas.matheus\Desktop\Clientes'
@@ -10,22 +11,26 @@ function c {
         $pastasEncontradas = Get-ChildItem -Path $caminho -Directory | Where-Object { $_.Name.ToUpper() -like "*$inputNamePasta*".ToUpper() }
 
         if ($inputNamePasta -ne "") {
-            if ($pastasEncontradas.Count -eq 0) {
+            if ($pastasEncontradas.Count -eq 0 -and $apenasPesquisar -ne 'sim') {
                 #Criar nova pasta
                 Write-Host "Nova pasta criada... " $inputNamePasta -ForegroundColor Green
                 New-Item -ItemType Directory -Path "$caminho\$inputNamePasta" -Force
                 Start-Process explorer.exe -ArgumentList "$caminho\$inputNamePasta"
                 mostrarMensagemPadrao $null $null
-            }
+            } 
             elseif ($pastasEncontradas.Count -eq 1) {
                 #abre a pasta
                 Start-Process explorer.exe -ArgumentList "$caminho\$pastasEncontradas"
                 Exit
             }
-            else {
+            elseif ($pastasEncontradas.Count -gt 1){
                 #Várias pastas foram encontradas
                 $pastasEncontradas | Format-Table -AutoSize
                 $inputNamePasta = Read-Host  "Varias pastas foram encontradas, seja mais especifico. Digite o nome de uma pasta "
+            } else {
+                #Nenhuma pasta foi encontrada
+                Read-Host 'Nenhuma pasta foi encontrada...'
+                Exit
             }
         }
         else {
