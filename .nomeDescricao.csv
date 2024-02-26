@@ -1,0 +1,3 @@
+NOME;CONTEUDO;DESCRICAO;TEMPO_FECHAMENTO;COR_DESCRICAO;DATA_CRIACAO;EXCLUIDA
+a;"select cd_status,cd_status_nfe,a.* from dbamv.nota_fiscal a order by cd_nota_fiscal desc";"Seleciona cd_status,cd_status_nfe da tabela do produto.";500;'Green';'2019-10-10 10:10:10';'N'
+b;"select cd_status,cd_status_nfe,a.* from dbamv.mvs_nota_fiscal a order by cd_nota_fiscal desc;";"Seleciona cd_status,cd_status_nfe da tabela do produto - PLANO DE SAUDE.";500;'Green';'2019-10-10 10:10:10';'N

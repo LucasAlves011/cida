@@ -2,6 +2,8 @@
 
 $CAMINHO_BASE = $PSScriptRoot #Caminho da pasta onde este script roda
 
+
+
 class Funcao {
     [string]$Nome
     [string]$Descricao
@@ -112,8 +114,8 @@ function excluirxmlp {
 
 function saida {
     #Descricao= Parametros cadastro de saida.
-    mostrarMensagemPadrao  'SELECT SAIDA copiado.' "SELECT b.cd_empresa_destino,b.CD_SISTEMA_DESTINO,b.ds_saida,a.* FROM mvintegra.imv_configuracao_saida_param a 
-    INNER JOIN mvintegra.imv_configuracao_saida b ON a.cd_imv_configuracao_saida = b.cd_imv_configuracao_saida 
+    mostrarMensagemPadrao  'SELECT SAIDA copiado.' "SELECT b.cd_empresa_destino,b.CD_SISTEMA_DESTINO,b.ds_saida,a.* FROM mvintegra.imv_configuracao_saida_param a
+    INNER JOIN mvintegra.imv_configuracao_saida b ON a.cd_imv_configuracao_saida = b.cd_imv_configuracao_saida
     WHERE (b.ds_saida like ('%RPS%') OR b.ds_saida LIKE ('%NFSE%'))"
 }
 

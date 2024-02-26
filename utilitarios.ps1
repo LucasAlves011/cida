@@ -1,3 +1,43 @@
+
+
+class Funcao2 {
+    [string]$Nome
+    [string]$Conteudo
+    [string]$Descricao
+    [int]$Tempo_fechamento
+    [string]$Cor_descricao
+    [string]$Excluida
+
+    [string] ToString() {
+        return "Nome: $($this.Nome), Conteudo: $($this.Conteudo), Descrição: $($this.Descricao), Tempo de Fechamento: $($this.Tempo_fechamento), Cor da Descrição: $($this.Cor_descricao)`n"
+    }
+}
+
+#import o arquivo csv e construa um objeto com os dados e print na tela
+$filePath = "C:\Users\lucas\OneDrive\Documentos\Coisas da mv\mavi\.nomeDescricao.csv"
+
+
+# Importar dados do CSV para um array de objetos Funcao2
+<#
+$dados = Import-Csv -Path $filePath | ForEach-Object {
+    $funcaoObjeto = [Funcao2]::new()
+    write-host $_.Nome
+    # $funcaoObjeto.Nome = $_.Nome
+    $funcaoObjeto.Conteudo = $_.Conteudo
+    $funcaoObjeto.Descricao = $_.Descricao
+    $funcaoObjeto.Tempo_fechamento = [int]$_.Tempo_fechamento
+    $funcaoObjeto.Cor_descricao = $_.Cor_descricao
+    $funcaoObjeto
+} #>
+
+# $dados | Format-Table
+write-host $dados | ForEach-Object { _.ToString }
+
+
+# Exibir dados como tabela
+
+
+
 function c {
     #Descricao= Utilitario de pastas.
     param(
@@ -45,7 +85,7 @@ function mostrarMensagemPadrao {
         [string]$conteudo,
         [int]$tempoFechamento = 500,
         [bool]$fechaAutomatico = $true,
-        [string]$corTexto = 'Green'        
+        [string]$corTexto = 'Green'
     )
     write-host  "
                                         ::::::::::::::::::   :
@@ -71,10 +111,10 @@ function mostrarMensagemPadrao {
     if ($mensagem -ne $null -and $mensagem -ne '') {
         printCentralizado $mensagem $corTexto
     }
-  
+
     Start-Sleep -Milliseconds $tempoFechamento
-    
-    if ($fechaAutomatico){
+
+    if ($fechaAutomatico) {
         Exit
     }
 }
@@ -95,10 +135,10 @@ function printCentralizado {
 function func {
     #Descricao= Catálogo de funções no powerShell.
     $listaFuncoes = @()
-    $arquivosPS1  = Get-ChildItem -Path $CAMINHO_BASE -Filter *.ps1
+    $arquivosPS1 = Get-ChildItem -Path $CAMINHO_BASE -Filter *.ps1
 
     foreach ($arquivo in $arquivosPS1) {
-        $conteudo +=  Get-Content -Path $arquivo.FullName -Raw -Encoding UTF8
+        $conteudo += Get-Content -Path $arquivo.FullName -Raw -Encoding UTF8
     }
 
     $indicesFunction = @()
