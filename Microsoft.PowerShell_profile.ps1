@@ -56,6 +56,19 @@ function monta {
     $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\Script Monta Trigger e procedure.txt" -Raw -Encoding UTF8
     mostrarMensagemPadrao  'MONTA copiado.' $conteudo
 }
+
+function envmassa {
+    #Descricao= Chama a integração de envio em massa.
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\ENVIO EM MASSA.sql" -Raw -Encoding UTF8
+    mostrarMensagemPadrao  'Envio em massa copiado.' $conteudo
+}
+
+function consmassa {
+    #Descricao= Chama a integração de consulta em massa.
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\CONSULTA EM MASSA.sql" -Raw -Encoding UTF8
+    mostrarMensagemPadrao  'Consulta em massa copiado.' $conteudo
+} 
+
 function copia {
     #Descricao= Copia parametros de uma saida.
     $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\copia_parametros.txt" -Raw -Encoding UTF8
