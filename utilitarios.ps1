@@ -51,6 +51,11 @@ function mostrarMensagemPadrao {
         [int]$tempoFechamento = 500,       
         [string]$corTexto = 'Green'        
     )
+
+    if ($conteudo -ne $null -and $conteudo -ne '') {
+        Set-Clipboard -value $conteudo
+    }
+
     write-host  "
                                         ::::::::::::::::::   :
                                     ^J555555555555555555: :P5?~:
@@ -67,10 +72,6 @@ function mostrarMensagemPadrao {
                                     ~Y555555555555555555:  PPY7^
                                     :^~~~~~~~~~~~~~~~~~   ^
 "
-
-    if ($conteudo -ne $null -and $conteudo -ne '') {
-        Set-Clipboard -value $conteudo
-    }
 
     if ($mensagem -ne $null -and $mensagem -ne '') {
         printCentralizado $mensagem $corTexto
