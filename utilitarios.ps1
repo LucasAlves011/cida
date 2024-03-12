@@ -7,7 +7,7 @@ function c {
     #Descricao= Utilitario de pastas.
     param(
         [string]$inputNamePasta,
-        [string]$apenasPesquisar = 'sim'
+        [string]$apenasPesquisar = 'nao'
     )
     $previneLoop = 0
     $caminho = 'C:\Users\lucas.matheus\Desktop\Clientes'
@@ -227,14 +227,18 @@ function cadastrar {
             }
             else {
                 # Salve o script
-                #Criar arquivo txt com o nome do script
+
+                # Cria a pasta se não existir
+                if (-not (Test-Path -Path "$CAMINHO_BASE/scripts" -PathType Container)) {
+                    New-Item -Path "$CAMINHO_BASE/scripts" -ItemType Directory -Force
+                }
+
                 $scriptContent | Out-File -FilePath "$CAMINHO_BASE/scripts\$scriptName.txt" -Encoding utf8
 
                 $conteudo = formatarFuncao $scriptName $textBoxDescricao.Text $scriptContent
 
                 $conteudo | Out-File -FilePath "$PSScriptRoot\funcoes.ps1" -Append  -Encoding utf8
-                [System.Windows.MessageBox]::Show("Script salvo com sucesso!", "Sucesso" , [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Information)
-                # Feche a janela após salvar
+                [System.Windows.MessageBox]::Show("Script salvo com sucesso!", "Sucesso", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Information) # Feche a janela após salvar
                 $window.Close()
                 Exit
             }
