@@ -1,4 +1,0 @@
-SELECT  ROW_NUMBER() OVER (PARTITION BY CD_MULTI_EMPRESA ORDER BY CD_MULTI_EMPRESA) AS id,CD_MULTI_EMPRESA ,b.CD_SISTEMA_DESTINO ,b.cd_empresa_destino AS emp,TP_CONDICAO AS cond ,DS_VALOR  
- FROM mvintegra.imv_configuracao_condicao_env a 
- inner join mvintegra.imv_configuracao_saida b 
- ON a.CD_IMV_CONFIGURACAO_SAIDA = b.CD_IMV_CONFIGURACAO_SAIDA   WHERE TP_DOCUMENTO = 'LOTE_RPS_ENVIO' ORDER BY CD_MULTI_EMPRESA--, to_number(ds_valor) ;

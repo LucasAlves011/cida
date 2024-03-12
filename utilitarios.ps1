@@ -1,3 +1,8 @@
+class Funcao {
+    [string]$Nome
+    [string]$Descricao
+}
+
 function c {
     #Descricao= Utilitario de pastas.
     param(
@@ -46,6 +51,7 @@ function c {
 
 function mostrarMensagemPadrao {
     #Descricao=
+
     param (
         [string]$mensagem,
         [string]$conteudo,
@@ -114,12 +120,14 @@ function func {
         $indicesFunction += $indice
         $indice = $conteudo.IndexOf("function", $indice + 1)
     }
+
     foreach ($indiceFunction in $indicesFunction) {
         try {
             $substring = $conteudo.Substring($indiceFunction)
 
             $palavrasSubsequentes = $substring -split '\s+' | Select-Object -Skip 1
             if ( $palavrasSubsequentes[1] -eq '{') {
+
                 $substring = $substring -split "`r`n"
                 $descricao = $substring | Where-Object { $_ -match '#Descricao=' } | Select-Object -First 1 | ForEach-Object { $_ -replace '#Descricao=' }
             }
@@ -151,6 +159,7 @@ function func {
 }
 
 function cadastrar {
+    #Descricao= Cadastrar funcao no powerShell.
     Add-Type -AssemblyName PresentationFramework
 
     $icon = New-Object System.Windows.Media.Imaging.BitmapImage
@@ -218,14 +227,13 @@ function cadastrar {
             }
             else {
                 # Salve o script
-                #escreve dentro do script
-                $conteudo = "`nfunction $scriptName {`n"
-                $conteudo += "    #Descricao= $($textBoxDescricao.Text)`n"
-                $conteudo += "    mostrarMensagemPadrao '$scriptContent'`n"
-                $conteudo += "}`n"
+                #Criar arquivo txt com o nome do script
+                $scriptContent | Out-File -FilePath "$CAMINHO_BASE/scripts\$scriptName.txt" -Encoding utf8
+
+                $conteudo = formatarFuncao $scriptName $textBoxDescricao.Text $scriptContent
 
                 $conteudo | Out-File -FilePath "$PSScriptRoot\funcoes.ps1" -Append  -Encoding utf8
-                [System.Windows.MessageBox]::Show("Script salvo com sucesso!", "Sucesso" , [System.Windows.MessageBoxImage]::Information)
+                [System.Windows.MessageBox]::Show("Script salvo com sucesso!", "Sucesso" , [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Information)
                 # Feche a janela após salvar
                 $window.Close()
                 Exit
@@ -240,6 +248,31 @@ function cadastrar {
     # Adicione os Labels, TextBoxes e o botão ao StackPanel
     Exit
 }
+
+function formatarFuncao {
+    #Descricao=
+    param (
+        [string]$nomeFuncao,
+        [string]$descricao,
+        [string]$conteudo
+    )
+
+    $descricao = $descricao -replace "'", ""
+    if ($descricao.Substring($descricao.Length - 1) -ne ".") {
+        $descricao += "."
+    }
+
+    $nomeFuncao = $nomeFuncao -replace "'", ""
+
+
+    $conteudo = "`nfunction $nomeFuncao {`n"
+    $conteudo += "    #Descricao= " + $descricao + "`n"
+    $conteudo += '    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\' + $nomeFuncao + ".txt`"" + " -Raw -Encoding UTF8`n"
+    $conteudo += "    mostrarMensagemPadrao " + "`"$nomeFuncao copiado.`"" + ' $conteudo' + "`n"
+    $conteudo += "}`n"
+    return $conteudo
+}
+
 
 #verificar SOMENTE se ja existe uma função com o nome, ignorando a descricao
 function verificarFuncaoExistente {
