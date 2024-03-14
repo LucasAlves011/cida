@@ -215,8 +215,8 @@ function cadastrar {
 
     $button.Add_Click({
             Write-Host "Salvando script..."
-            $scriptContent = $textBoxScript.Text
-            $scriptName = $textBoxNome.Text
+            $scriptContent = $textBoxScript.Text.Trim()
+            $scriptName = $textBoxNome.Text.Trim()
 
             # Verifique se o nome e o conteúdo do script estão preenchidos
             if ($scriptName -eq "" -or $scriptContent -eq "") {
@@ -224,6 +224,12 @@ function cadastrar {
             }
             elseif (verificarFuncaoExistente $scriptName) {
                 [System.Windows.MessageBox]::Show("Ja existe uma funcao com o nome $scriptName", "Erro", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Error)
+            }
+            elseif ($scriptName -match '\s') {
+                [System.Windows.MessageBox]::Show("O nome da funcao nao pode conter espacos", "Erro", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Error)
+            }
+            elseif ($scriptName -match '[!@#%^&*.,:;+\-=<>()\[\]{}\\/|?"]') {
+                [System.Windows.MessageBox]::Show("O nome da função não pode conter caracteres especiais", "Erro", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Error)
             }
             else {
                 # Salve o script
@@ -235,7 +241,7 @@ function cadastrar {
 
                 $scriptContent | Out-File -FilePath "$CAMINHO_BASE/scripts\$scriptName.txt" -Encoding utf8
 
-                $conteudo = formatarFuncao $scriptName $textBoxDescricao.Text $scriptContent
+                $conteudo = formatarFuncao $scriptName $textBoxDescricao.Text
 
                 $conteudo | Out-File -FilePath "$PSScriptRoot\funcoes.ps1" -Append  -Encoding utf8
                 [System.Windows.MessageBox]::Show("Script salvo com sucesso!", "Sucesso", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Information) # Feche a janela após salvar
@@ -253,12 +259,159 @@ function cadastrar {
     Exit
 }
 
+function alterar {
+    #Descricao= Alterar script.
+
+    param(
+        [string]$nomeScript
+    )
+    #Descricao= Alterar script no powerShell.
+    Add-Type -AssemblyName PresentationFramework
+
+    $icon = New-Object System.Windows.Media.Imaging.BitmapImage
+    $icon.BeginInit()
+    $icon.UriSource = New-Object System.Uri("$CAMINHO_BASE./favicon.ico")
+    $icon.EndInit()
+
+    # Crie uma nova janela WPF
+    $window = New-Object System.Windows.Window
+    $window.Title = "Alterar Script"
+    $window.Width = 500
+    $window.Height = 550
+    $window.Icon = $icon
+
+    # Crie um StackPanel para organizar os controles
+    $stack = New-Object System.Windows.Controls.StackPanel
+
+
+    $nomeAntigoScript = $nomeScript
+    $arquivoFuncoes = Get-Content -Path "$CAMINHO_BASE/funcoes.ps1" -Raw -Encoding UTF8
+
+    if ($nomeScript -eq '' -or $nomeScript -eq $null) {
+        [System.Windows.MessageBox]::Show("Nao e possivel alterar um script com nome vazio ou nulo.", "Alterar script", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Error)
+        Exit
+    }
+
+    if ($arquivoFuncoes -match "(function\s+$nomeAntigoScript\s*{[^}]*})") {
+        # O bloco de texto da função encontrada está em $matches[0]
+        $blocoFuncao = $matches[0]
+    }
+    else {
+        [System.Windows.MessageBox]::Show("Script $nomeScript nao encontrado.", "Alterar script", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Error)
+        Exit
+    }
+
+    if ($blocoFuncao -match '#Descricao=(.*)') {
+        $descricao = $Matches[0] -replace '#Descricao= ', ''
+    }
+    else {
+        $descricao = ''
+        write-host 'Descrição não encontrada'
+    }
+
+    $conteudo = Get-Content -Path "$CAMINHO_BASE/scripts/$nomeScript.txt" -Raw -Encoding UTF8
+
+    # Crie um Label e um TextBox para o nome do script
+    $labelNome = New-Object System.Windows.Controls.Label
+    $labelNome.Content = "Nome do Script:"
+    $textBoxNome = New-Object System.Windows.Controls.TextBox
+    $textBoxNome.Width = 450
+    $textBoxNome.Height = 25
+    $textBoxNome.Text = $nomeScript
+    # $textBoxNome.IsEnabled = $false
+
+    $labelDescricao = New-Object System.Windows.Controls.Label
+    $labelDescricao.Content = "Descricao :"
+    $textBoxDescricao = New-Object System.Windows.Controls.TextBox
+    $textBoxDescricao.Width = 450
+    $textBoxDescricao.Height = 25
+    $textBoxDescricao.Text = $descricao
+    # $textBoxDescricao.IsEnabled = $false
+
+    # Crie um Label e um TextBox maior para o script
+    $labelScript = New-Object System.Windows.Controls.Label
+    $labelScript.Content = "Script:"
+    $textBoxScript = New-Object System.Windows.Controls.TextBox
+    $textBoxScript.Width = 450
+    $textBoxScript.Height = 300
+    $textBoxScript.AcceptsReturn = $true
+    $textBoxScript.VerticalScrollBarVisibility = 'Visible'
+    $textBoxScript.Text = $conteudo
+
+    # Crie um botão
+    $button = New-Object System.Windows.Controls.Button
+    $button.Content = "Salvar Script"
+    $button.Width = 150
+    $button.Margin = New-Object System.Windows.Thickness(15)
+
+    $stack.Children.Add($labelNome)
+    $stack.Children.Add($textBoxNome)
+    $stack.Children.Add($labelDescricao)
+    $stack.Children.Add($textBoxDescricao)
+    $stack.Children.Add($labelScript)
+    $stack.Children.Add($textBoxScript)
+    $stack.Children.Add($button)
+
+    $button.Add_Click({
+            $scriptContent = $textBoxScript.Text
+            $scriptName = $textBoxNome.Text
+            # $scriptContent = $scriptContent
+            $descricao = $textBoxDescricao.Text
+
+            $scriptContent = $textBoxScript.Text.Trim()
+            $scriptName = $textBoxNome.Text.Trim()
+            $descricao = $textBoxDescricao.Text.Trim()
+
+            # Verifique se o nome e o conteúdo do script estão preenchidos
+            if ($scriptName -eq "" -or $scriptContent -eq "") {
+                [System.Windows.MessageBox]::Show("Nome e conteudo do script sao obrigatorios!", "Erro", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Error)
+            }
+            elseif (($scriptName -ne $nomeAntigoScript) -and (verificarFuncaoExistente $scriptName)) {
+                [System.Windows.MessageBox]::Show("Ja existe uma funcao com o nome $scriptName", "Erro", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Error)
+            }
+            elseif ($scriptName -match '\s') {
+                [System.Windows.MessageBox]::Show("O nome da funcao nao pode conter espacos", "Erro", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Error)
+            }
+            elseif ($scriptName -match '[!@#%^&*.,:;+\-=<>()\[\]{}\\/|?"]') {
+                [System.Windows.MessageBox]::Show("O nome da função não pode conter caracteres especiais", "Erro", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Error)
+            }
+            else {
+
+                $descricao = $descricao -replace "'", ""
+                if ($descricao.Substring($descricao.Length - 1) -ne ".") {
+                    $descricao += "."
+                }
+
+                $novaReferenciaFuncao = formatarFuncao $scriptName $descricao
+
+                $arquivoFuncoes = $arquivoFuncoes -replace "(\n*function\s+$nomeAntigoScript\s*{[^}]*}\n*)", $novaReferenciaFuncao
+
+                if ($scriptName -ne $nomeAntigoScript) {
+                    #alterar nome do arquivo
+                    Rename-Item -Path "$CAMINHO_BASE/scripts/$nomeAntigoScript.txt" -NewName "$scriptName.txt"
+                }
+
+                # Salve o script
+                $scriptContent | Out-File -FilePath "$CAMINHO_BASE/scripts\$scriptName.txt" -Encoding utf8
+                # $arquivoFuncoes | Out-File -FilePath "$CAMINHO_BASE/funcoes.ps1" -Encoding utf8
+                Set-Content -Path "$CAMINHO_BASE/funcoes.ps1" -Value $arquivoFuncoes -Encoding UTF8
+
+                [System.Windows.MessageBox]::Show("Script alterado com sucesso!", "Sucesso", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Information) # Feche a janela após salvar
+                $window.Close()
+                Exit
+            }
+        })
+    $window.AddChild($stack)
+
+    # Exiba a janela
+    $null = $window.ShowDialog()
+    Exit
+}
 function formatarFuncao {
     #Descricao=
     param (
         [string]$nomeFuncao,
-        [string]$descricao,
-        [string]$conteudo
+        [string]$descricao
     )
 
     $descricao = $descricao -replace "'", ""
@@ -268,17 +421,15 @@ function formatarFuncao {
 
     $nomeFuncao = $nomeFuncao -replace "'", ""
 
-
-    $conteudo = "`nfunction $nomeFuncao {`n"
-    $conteudo += "    #Descricao= " + $descricao + "`n"
-    $conteudo += '    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\' + $nomeFuncao + ".txt`"" + " -Raw -Encoding UTF8`n"
-    $conteudo += "    mostrarMensagemPadrao " + "`"$nomeFuncao copiado.`"" + ' $conteudo' + "`n"
-    $conteudo += "}`n"
+    $conteudo = "`nfunction $nomeFuncao { `n" +
+    "    #Descricao= " + $descricao + "`n" +
+    '    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\' + $nomeFuncao + ".txt`"" + " -Raw -Encoding UTF8`n" +
+    "    mostrarMensagemPadrao " + "`"$nomeFuncao copiado.`"" + ' $conteudo' + "`n" +
+    "}`n"
     return $conteudo
 }
 
-
-#verificar SOMENTE se ja existe uma função com o nome, ignorando a descricao
+#Verificar se uma função existe ignorando a descricao e usando regex
 function verificarFuncaoExistente {
     #Descricao=
     param (
@@ -291,30 +442,8 @@ function verificarFuncaoExistente {
         $conteudo += Get-Content -Path $arquivo.FullName -Raw -Encoding UTF8
     }
 
-    $indicesFunction = @()
-    $indice = $conteudo.IndexOf("function")
-
-    while ($indice -ne -1) {
-        $indicesFunction += $indice
-        $indice = $conteudo.IndexOf("function", $indice + 1)
-    }
-    foreach ($indiceFunction in $indicesFunction) {
-        try {
-            $substring = $conteudo.Substring($indiceFunction)
-
-            $palavrasSubsequentes = $substring -split '\s+' | Select-Object -Skip 1
-            if ( $palavrasSubsequentes[1] -eq '{') {
-                $substring = $substring -split "`r`n"
-                $descricao = $substring | Where-Object { $_ -match '#Descricao=' } | Select-Object -First 1 | ForEach-Object { $_ -replace '#Descricao=' }
-            }
-
-            if ($palavrasSubsequentes[0] -eq $nomeFuncao) {
-                return $true
-            }
-        }
-        catch {
-
-        }
+    if ($conteudo -match "(function\s+$nomeFuncao\s*{[^}]*})") {
+        return $true
     }
     return $false
 }
