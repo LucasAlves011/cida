@@ -195,6 +195,10 @@ function execucao {
 
 function status {
    #Descricao= Lista com o detalhamento com os status.
+   class Status {
+      [string]$cd
+      [string]$descricao
+  }
    $listaStatus1 = @(
        [Status]@{cd = '1'  ; descricao = 'RPS Gravado' },
        [Status]@{cd = '2'  ; descricao = 'RPS Impresso' },
