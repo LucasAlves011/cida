@@ -1,0 +1,18 @@
+﻿CREATE OR REPLACE TRIGGER mvintegra.trg_error_a02
+before UPDATE
+OF ds_erro
+ON mvintegra.imv_mensagem_saida_formatada
+FOR EACH ROW
+
+BEGIN
+
+  IF (:new.ds_erro LIKE '%A02%' AND :new.tp_documento = 'LOTE_RPS_CONSULTA') THEN  
+   :new.ds_erro := NULL;
+   :new.tp_status := 'A';
+   :new.dh_ultimo_envio := NULL;
+   :new.lo_retorno := NULL;
+   :new.dh_retorno := NULL;
+
+  END IF; 
+
+END;

@@ -3,6 +3,80 @@ class Funcao {
     [string]$Descricao
 }
 
+function f {
+
+    param(
+        [string]$Ordernacao = "DESC"
+    )
+ 
+    $jsonContent = Get-Content -Path  $CAMINHO_JSON_FUNCTION_NAMES -Raw | ConvertFrom-Json
+
+    $listaFuncoes = @()
+
+    foreach ($obj in $jsonContent) {
+        $funcao = [FuncaoJson]::new()
+        $funcao.Id = $obj.id
+        $funcao.Nome = $obj.nome
+        $funcao.Descricao = $obj.descricao
+        $funcao.Qtd_usada = $obj.qtd_usada
+        $funcao.Sn_interna = $obj.sn_interna
+        $listaFuncoes += $funcao
+    }
+
+    if ($Ordernacao -eq "DESC") {
+        $listaFuncoes = $listaFuncoes | Sort-Object -Property Qtd_usada -Descending
+    }
+    else {
+        $listaFuncoes = $listaFuncoes | Sort-Object -Property Qtd_usada 
+    }
+ 
+
+    do {
+        $listaFuncoes | Format-Table Nome, Descricao -AutoSize 
+
+        $escolhaFuncao = Read-Host "Qual funcao deseja escolher "
+
+        if ($escolhaFuncao.Trim().Split(' ') -ge 2 -and ($escolhaFuncao.Trim().Split(' ')[0] -eq 'v' -or $escolhaFuncao.Trim().Split(' ')[0] -eq 'ver') ) {
+            $nomeFuncao = $escolhaFuncao.Trim().Split(' ')[1]
+            $funcao = $listaFuncoes | Where-Object { $_.Nome -eq $nomeFuncao }
+            if ($null -ne $funcao ) {
+                Clear-Host
+
+                $nomeF = $funcao.Nome
+
+                Write-Host "Nome da funcao: " $funcao.Nome "`n"
+                Write-Host "Descricao: " $funcao.Descricao "`n`n"
+                
+                $conteudoFuncao = Get-Content -path ("$CAMINHO_BASE\scripts\$($funcao.Nome).txt") -Raw -Encoding UTF8 
+                Write-host $conteudoFuncao "`n`n`n"
+
+                $escolha = Read-Host "Pressione Enter para voltar a tela ou C para copiar o conteudo da funcao para a area de transferencia: "
+                if ($escolha -eq 'C' -or $escolha -eq 'c') {
+                    Clear-Host
+                    mostrarMensagemPadrao $funcao.Descricao $conteudoFuncao
+                }
+            }
+            else {
+                Write-Host "Funcao nao encontrada" "`n" -ForegroundColor Red 
+                Start-Sleep -Milliseconds 1500 
+            }
+            Clear-Host
+        }
+        else {
+            #Split para dar suporte a funçõe com argumentos, ele vai procurar pelo nome da função que vem antes do ' '.
+            if ($listaFuncoes.Nome -contains $escolhaFuncao.Split(' ')[0]) {
+                Invoke-Expression "$escolhaFuncao"
+            }
+            elseif ($escolhaFuncao -eq "") {
+                mostrarMensagemPadrao 'Saindo...' $null
+            }
+            else {
+                Write-Host $escolhaFuncao "nao e uma funcao valida. Tente novamente"  -ForegroundColor Red
+            }
+        }
+    } while ($listaFuncoes.Nome -notcontains $escolhaFuncao)
+}
+
 function c {
     #Descricao= Utilitario de pastas.
     param(
@@ -10,7 +84,11 @@ function c {
         [string]$apenasPesquisar = 'nao'
     )
     $previneLoop = 0
-    $caminho = 'C:\Users\lucas.matheus\Desktop\Clientes'
+    $caminho = "$CAMINHO_PASTA_DOCUMENTOS\Clientes"
+
+    if ( -not (Test-Path -Path $caminho -PathType Container)) {
+        New-Item -ItemType Directory -Path "$CAMINHO_PASTA_DOCUMENTOS\Clientes" -Force
+    }
 
     do {
         $pastasEncontradas = Get-ChildItem -Path $caminho -Directory | Where-Object { $_.Name.ToUpper() -like "*$inputNamePasta*".ToUpper() }
@@ -20,7 +98,7 @@ function c {
                 #Criar nova pasta
                 Write-Host "Nova pasta criada... " $inputNamePasta -ForegroundColor Green
                 New-Item -ItemType Directory -Path "$caminho\$inputNamePasta" -Force
-                Start-Process explorer.exe -ArgumentList "$caminho\$inputNamePasta"
+                Start-Process explorer.exe "$caminho\$inputNamePasta"
                 mostrarMensagemPadrao $null $null
             }
             elseif ($pastasEncontradas.Count -eq 1) {
@@ -41,7 +119,7 @@ function c {
         }
         else {
             #abrir a pasta clientes
-            Start-Process explorer.exe -ArgumentList 'C:\Users\lucas.matheus\Desktop\Clientes\'
+            Start-Process explorer.exe -ArgumentList $caminho 
             Exit
         }
         $previneLoop++;
@@ -78,7 +156,7 @@ function mostrarMensagemPadrao {
                                     75555555555555555555:  PGGGGPJ!^
                                     ~Y555555555555555555:  PPY7^
                                     :^~~~~~~~~~~~~~~~~~   ^
-"
+    "
 
     if ($mensagem -ne $null -and $mensagem -ne '') {
         printCentralizado $mensagem $corTexto
@@ -104,67 +182,13 @@ function printCentralizado {
     Write-Host $textoCentralizado -ForegroundColor $Cor
 }
 
-function func {
-    #Descricao= Catálogo de funções no powerShell.
-    $listaFuncoes = @()
-    $arquivosPS1 = Get-ChildItem -Path $CAMINHO_BASE -Filter *.ps1
-
-    foreach ($arquivo in $arquivosPS1) {
-        $conteudo += Get-Content -Path $arquivo.FullName -Raw -Encoding UTF8
-    }
-
-    $indicesFunction = @()
-    $indice = $conteudo.IndexOf("function")
-
-    while ($indice -ne -1) {
-        $indicesFunction += $indice
-        $indice = $conteudo.IndexOf("function", $indice + 1)
-    }
-
-    foreach ($indiceFunction in $indicesFunction) {
-        try {
-            $substring = $conteudo.Substring($indiceFunction)
-
-            $palavrasSubsequentes = $substring -split '\s+' | Select-Object -Skip 1
-            if ( $palavrasSubsequentes[1] -eq '{') {
-
-                $substring = $substring -split "`r`n"
-                $descricao = $substring | Where-Object { $_ -match '#Descricao=' } | Select-Object -First 1 | ForEach-Object { $_ -replace '#Descricao=' }
-            }
-
-            if (($listaFuncoes | Where-Object { $_.Descricao -eq $descricao.Trim() }).Count -eq 0 ) {
-                $listaFuncoes += [Funcao]@{Nome = $palavrasSubsequentes[0]; Descricao = $descricao.Trim() }
-            }
-        }
-        catch {
-
-        }
-    }
-    $listaFuncoes | Format-Table -AutoSize
-
-    do {
-        $escolhaFuncao = Read-Host "Qual funcao deseja escolher "
-        #Split para dar suporte a funçõe com argumentos, ele vai procurar pelo nome da função que vem antes do ' '.
-        if ($listaFuncoes.Nome -contains $escolhaFuncao.Split(' ')[0]) {
-            Invoke-Expression "$escolhaFuncao"
-        }
-        elseif ($escolhaFuncao -eq "") {
-            mostrarMensagemPadrao 'Saindo...' $null
-        }
-        else {
-            Write-Host $escolhaFuncao "nao e uma funcao valida. Tente novamente"  -ForegroundColor Red
-        }
-    } while ($listaFuncoes.Nome -notcontains $escolhaFuncao)
-
-}
-
 function cadastrar {
     #Descricao= Cadastrar funcao no powerShell.
     Add-Type -AssemblyName PresentationFramework
 
     $icon = New-Object System.Windows.Media.Imaging.BitmapImage
     $icon.BeginInit()
-    $icon.UriSource = New-Object System.Uri("$CAMINHO_BASE./favicon.ico")
+    $icon.UriSource = New-Object System.Uri("$CAMINHO_BASE./resources/favicon.ico")
     $icon.EndInit()
 
     # Crie uma nova janela WPF
@@ -244,6 +268,9 @@ function cadastrar {
                 $conteudo = formatarFuncao $scriptName $textBoxDescricao.Text
 
                 $conteudo | Out-File -FilePath "$PSScriptRoot\funcoes.ps1" -Append  -Encoding utf8
+
+                cadastrarNovaFuncaoAoJson -Nome $scriptName -Descricao $textBoxDescricao.Text
+
                 [System.Windows.MessageBox]::Show("Script salvo com sucesso!", "Sucesso", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Information) # Feche a janela após salvar
                 $window.Close()
                 Exit
@@ -270,7 +297,7 @@ function alterar {
 
     $icon = New-Object System.Windows.Media.Imaging.BitmapImage
     $icon.BeginInit()
-    $icon.UriSource = New-Object System.Uri("$CAMINHO_BASE./favicon.ico")
+    $icon.UriSource = New-Object System.Uri("$CAMINHO_BASE./resources/favicon.ico")
     $icon.EndInit()
 
     # Crie uma nova janela WPF
@@ -283,6 +310,8 @@ function alterar {
     # Crie um StackPanel para organizar os controles
     $stack = New-Object System.Windows.Controls.StackPanel
 
+
+    $id = getIdFuncao $nomeScript
 
     $nomeAntigoScript = $nomeScript
     $arquivoFuncoes = Get-Content -Path "$CAMINHO_BASE/funcoes.ps1" -Raw -Encoding UTF8
@@ -393,8 +422,10 @@ function alterar {
 
                 # Salve o script
                 $scriptContent | Out-File -FilePath "$CAMINHO_BASE/scripts\$scriptName.txt" -Encoding utf8
+                
                 # $arquivoFuncoes | Out-File -FilePath "$CAMINHO_BASE/funcoes.ps1" -Encoding utf8
                 Set-Content -Path "$CAMINHO_BASE/funcoes.ps1" -Value $arquivoFuncoes -Encoding UTF8
+                modificarJson -Id $id -Nome $scriptName -Descricao $descricao
 
                 [System.Windows.MessageBox]::Show("Script alterado com sucesso!", "Sucesso", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Information) # Feche a janela após salvar
                 $window.Close()
@@ -424,6 +455,7 @@ function formatarFuncao {
     $conteudo = "`nfunction $nomeFuncao { `n" +
     "    #Descricao= " + $descricao + "`n" +
     '    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\' + $nomeFuncao + ".txt`"" + " -Raw -Encoding UTF8`n" +
+    '    addQtdUsada $MyInvocation.InvocationName' + "`n" +
     "    mostrarMensagemPadrao " + "`"$nomeFuncao copiado.`"" + ' $conteudo' + "`n" +
     "}`n"
     return $conteudo
@@ -436,7 +468,7 @@ function verificarFuncaoExistente {
         [string]$nomeFuncao
     )
 
-    $arquivosPS1 = Get-ChildItem -Path $CAMINHO_BASE -Filter *.ps1
+    $arquivosPS1 = Get-ChildItem -Path $CAMINHO_BASE -Filter *.ps1 -Recurse
     $conteudo = ""
     foreach ($arquivo in $arquivosPS1) {
         $conteudo += Get-Content -Path $arquivo.FullName -Raw -Encoding UTF8

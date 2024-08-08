@@ -1,0 +1,3 @@
+UPDATE mvintegra.imv_mensagem_saida_formatada SET tp_status = 'E' WHERE tp_status = 'A' AND tp_documento  IN('LOTE_RPS_ENVIO','LOTE_RPS_CONSULTA','CANCELAMENTO_RPS') ;
+UPDATE mvintegra.imv_mensagem_saida_padrao_stat SET tp_status = 'E' WHERE tp_status = 'A' AND cd_sistema_destino LIKE '%NFSE%';
+UPDATE mvintegra.imv_nota_fiscal_eletronica SET tp_status ='E' WHERE tp_status = 'A' AND tp_registro IN (001,002,003,033,034)  ;

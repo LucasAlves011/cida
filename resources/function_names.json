@@ -1,0 +1,303 @@
+[
+    {
+        "id":  "6a8d5e22-2b79-4bda-ae6d-51c1d9233d43",
+        "nome":  "a",
+        "descricao":  "Seleciona cd_status,cd_status_nfe da tabela do produto.",
+        "qtd_usada":  4,
+        "sn_interna":  false
+    },
+    {
+        "id":  "7b29c8a9-f9a3-4e62-9276-7eae4e65f0b7",
+        "nome":  "b",
+        "descricao":  "Seleciona cd_status,cd_status_nfe da tabela do produto - PLANO DE SAUDE.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "d142be6f-06ea-48f5-85b4-5042e39b90f2",
+        "nome":  "cons",
+        "descricao":  "Chama integração para CONSULTA.",
+        "qtd_usada":  1,
+        "sn_interna":  false
+    },
+    {
+        "id":  "fc4c8c09-6d7b-48e1-9c71-94cbaf2f5188",
+        "nome":  "env",
+        "descricao":  "Chama integração para ENVIO.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "e07d8037-6b90-4d14-a7d7-f4b5d3e7a874",
+        "nome":  "can",
+        "descricao":  "Chama integração para CANCELAMENTO.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "54d0cbb3-bb9c-4d4e-949c-36e9adf4f29e",
+        "nome":  "contar",
+        "descricao":  "Conta quantas notas estão em status A nas tabelas MVINTEGRA.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "a3d6b5ef-5e1f-44d8-bb16-1c32bb9a1f88",
+        "nome":  "erro",
+        "descricao":  "Seta notas para erro na tabela do produto.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "46f75436-6099-4a7b-930a-d6e0f960e688",
+        "nome":  "monta",
+        "descricao":  "Monta TRIGGERS e PROCEDURES.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "9bb0b9d6-46e1-464e-8a8b-785004a58c2d",
+        "nome":  "envmassa",
+        "descricao":  "Chama a integração de envio em massa.",
+        "qtd_usada":  1,
+        "sn_interna":  false
+    },
+    {
+        "id":  "c44e0158-e0c4-4c9f-90d4-0c6719fa8ff7",
+        "nome":  "consmassa",
+        "descricao":  "Chama a integração de consulta em massa.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "23f148e5-bc8b-42ec-b8b8-8dc43167c927",
+        "nome":  "copia",
+        "descricao":  "Copia parametros de uma saida.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "cb10b577-4b32-4e1b-bd8f-800c2073d2cf",
+        "nome":  "drop",
+        "descricao":  "Dropa pontos de integração.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "8e02cb71-e258-4f48-a08d-2f42c8dfcd95",
+        "nome":  "monitora",
+        "descricao":  "Cria tabela e triggers para monitora tomcats.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "e639b1e2-4d77-4b5f-b394-e0cf832e82ee",
+        "nome":  "condicoes",
+        "descricao":  "Chama integração para consulta.",
+        "qtd_usada":  1,
+        "sn_interna":  false
+    },
+    {
+        "id":  "244ae4a8-c29e-44ff-9f7b-bbfc060d5a0b",
+        "nome":  "verificaxml",
+        "descricao":  "Verifica XML padrão.",
+        "qtd_usada":  1,
+        "sn_interna":  false
+    },
+    {
+        "id":  "13f5f3b1-cb09-41b5-8fc4-f5ab4c9d3c9d",
+        "nome":  "merged",
+        "descricao":  "Merged script.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "9c5e4c9a-5c7f-463d-9c90-8dfd2c6d5e73",
+        "nome":  "espaco",
+        "descricao":  "Procura por espacos vazios no cadastro de saida.",
+        "qtd_usada":  1,
+        "sn_interna":  false
+    },
+    {
+        "id":  "a1451e84-4f83-4a37-8bfa-9d8a4b1b41b4",
+        "nome":  "cloud",
+        "descricao":  "Link do repositorio na cloud para import.",
+        "qtd_usada":  2,
+        "sn_interna":  false
+    },
+    {
+        "id":  "b6a7b7d1-6d77-46b2-85b0-8d4e03dc6e92",
+        "nome":  "tributo",
+        "descricao":  "Select nos tributos da nota.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "d529e50c-efae-4d91-a2f4-4e5f0b7a1f86",
+        "nome":  "excluirxmlp",
+        "descricao":  "Excluir xml padrão.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "290b1a12-0b07-4cf7-8270-420a31ad52ef",
+        "nome":  "saida",
+        "descricao":  "Parametros cadastro de saida.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "dd08f1d7-b6c6-45ea-bcf9-cd2d8e6df3f4",
+        "nome":  "url",
+        "descricao":  "Select da tabela sistemas, util para achar a url do soul.",
+        "qtd_usada":  1,
+        "sn_interna":  false
+    },
+    {
+        "id":  "d34d40c4-5db0-43ea-9e4a-90b5e9206d8a",
+        "nome":  "cdenvio",
+        "descricao":  "Select da condicoes de envio.",
+        "qtd_usada":  2,
+        "sn_interna":  false
+    },
+    {
+        "id":  "c43f76b6-9f62-44e6-8f9b-7226ec1dc2cb",
+        "nome":  "user",
+        "descricao":  "Seleciona usuarios.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "a3788f85-1a72-47d8-8c4a-3d7c7349d0bc",
+        "nome":  "jconsole",
+        "descricao":  "Seleciona usuarios.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "f4eb2d63-cd27-4b3d-8904-7f03b28f58e0",
+        "nome":  "questionario",
+        "descricao":  "Seleciona questionario de NFSE.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "b9ef5b8e-0c99-41d8-89c6-4f04e52885b6",
+        "nome":  "senha",
+        "descricao":  "Seleciona senha do gerador de senha.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "2eaf0d6d-8f2c-4c82-b8e0-3d0c7b68f2a2",
+        "nome":  "gui",
+        "descricao":  "Senha do gui.",
+        "qtd_usada":  1,
+        "sn_interna":  false
+    },
+    {
+        "id":  "31b3f1ab-2c75-4ec7-91e4-cd4d6f405d6d",
+        "nome":  "tls",
+        "descricao":  "flag do tls.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "5d3a07ec-4d80-4d78-a81a-5f4e935b59fc",
+        "nome":  "log",
+        "descricao":  "PRC de log para debug salvando em tabelas.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "b41c6f21-6c3b-4c1c-89c8-872b2d4d8f6c",
+        "nome":  "d",
+        "descricao":  "Select na tabela da integracao.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "3a0f09c4-bc94-4d29-ae77-5c0a1d82e1e0",
+        "nome":  "checaparam",
+        "descricao":  "Checa os nomes dos parametros.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "50a4a9eb-8b26-4e64-8e96-1e4ed009d9f8",
+        "nome":  "configempresa",
+        "descricao":  "Trata o configuracao de empresa nao encontrada.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "78d0eb5f-1e4a-4ae4-a2e3-7d3b00b8009a",
+        "nome":  "context",
+        "descricao":  "Context com usado de forma padrão para os tomcats.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "7dc2e8a4-68ab-4b0e-a3d8-8b44e5efc2d7",
+        "nome":  "s2",
+        "descricao":  "descricao da s.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "efc09f56-23b2-4636-b0d8-90df4e12a6d7",
+        "nome":  "triggera02",
+        "descricao":  "Trigger que monitora a mensagem formatada e joga a mensagem para A.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "7b2e5e62-b0b6-41c0-9a53-bb2c0e3f2f8e",
+        "nome":  "instancia",
+        "descricao":  "Tag de instancia do tomcat.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "9f4e8298-32c5-44d2-9d0a-79b2f97dcb54",
+        "nome":  "addcondicao",
+        "descricao":  "Adiciona condição de envio.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "c3d15234-3c9b-46c4-9f78-5f0d80b89e55",
+        "nome":  "envfirstcons",
+        "descricao":  "Script para reenvio da primeira consulta de uma nota fiscal.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "f0a6c6b8-1de8-4e4d-8d7e-9edc63b5e7a6",
+        "nome":  "pw",
+        "descricao":  "Link para meu notepadpw, senha : lucas123.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "a17c4c0a-1f18-41c4-9a6e-dbe0f23c8776",
+        "nome":  "slog",
+        "descricao":  "Select para a tabela de log.",
+        "qtd_usada":  0,
+        "sn_interna":  false
+    },
+    {
+        "id":  "548729d6-55f0-4e07-a0a7-345e28e78618",
+        "nome":  "execucao",
+        "descricao":  "Condições de execucao.",
+        "qtd_usada":  1,
+        "sn_interna":  false
+    },
+    {
+        "id":  "ce692be5-7ca6-4416-bce0-3a0d75b3cade",
+        "nome":  "status",
+        "descricao":  "Lista com o detalhamento com os status.",
+        "qtd_usada":  1,
+        "sn_interna":  false
+    }
+]
