@@ -4,10 +4,10 @@ DECLARE
     CD_NOVA_SAIDA NUMBER := 115; --> resultado     
 
     cursor c_base_copia IS 
-    SELECT * FROM imv_configuracao_saida_param WHERE cd_imv_configuracao_saida = CD_SAIDA_BASE; 
+    SELECT * FROM mvintegra.imv_configuracao_saida_param WHERE cd_imv_configuracao_saida = CD_SAIDA_BASE; 
     BEGIN 
     FOR parametro IN c_base_copia LOOP
-    INSERT INTO imv_configuracao_saida_param 
+    INSERT INTO mvintegra.imv_configuracao_saida_param 
         VALUES (CD_NOVA_SAIDA,parametro.nm_parametro,parametro.ds_valor,mvintegra.seq_imv_configuracao_saida_par.nextval);
     END LOOP;
 END; 

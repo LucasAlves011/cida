@@ -1,0 +1,1 @@
+﻿dbamv.prc_grava_log_erro('NFSE','','','TEXTO LIVRE '|| [VARIAVEL],904);

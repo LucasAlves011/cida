@@ -1,0 +1,1 @@
+Select b copiado.' "select cd_multi_empresa emp,cd_formulario_nf form,To_Char(dt_emissao,'DD.MM.YYYY') dt_emissao,cd_status,cd_status_nfe,nr_nota_fiscal_nfe,a.* from dbamv.mvs_nota_fiscal a order by cd_nota_fiscal desc;

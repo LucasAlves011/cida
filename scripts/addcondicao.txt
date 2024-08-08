@@ -1,0 +1,1 @@
+﻿INSERT INTO mvintegra.imv_configuracao_condicao_env VALUES (mvintegra.seq_imv_configuracao_cond_env.nextval,CD_MULTI_EMPRESA,CD_IMV_CONFIGURACAO_SAIDA,CD_IMV_CONFIGURACAO_ELEMEN_XML,'LOTE_RPS_CONSULTA','=','16');
