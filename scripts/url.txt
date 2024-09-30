@@ -1,1 +1,0 @@
-select replace(ds_url_servidor_html,'soul-product-workspace','soul-mv') url from dbasgu.produto_sistema where cd_produto = 'APOIO'

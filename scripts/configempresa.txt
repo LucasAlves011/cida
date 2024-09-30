@@ -1,5 +1,0 @@
-﻿SELECT * FROM mvintegra.config_mvintegra
-
-INSERT INTO mvintegra.config_mvintegra (CD_FILIAL_INTEGRA,CD_MULTI_EMPRESA,sn_ativa_integracao_agfa) VALUES(1,1,'S');
-
-UPDATE  mvintegra.config_mvintegra  SET CD_CONFIG_MVINTEGRA  = 1  WHERE CD_MULTI_EMPRESA  = 1
