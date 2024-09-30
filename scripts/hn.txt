@@ -1,0 +1,16 @@
+﻿1º Acessar VPN:
+
+Gateway Remoto : 201.218.237.226 porta 9443
+USUARIO : mvsoporteint
+SENHA: mvsoporteint2020!
+
+2º - Entrar ao navegador de no Google/Chrome e 
+colocar o link https://192.168.2.200/ui/
+
+Por favor digitar
+usuario: hnacional\mvadmin
+senha: HN@dminMV
+
+3º - Escolher o painel de indicadores 1 e clicar no botão azul.
+
+4º - Senha HN@dminMV.

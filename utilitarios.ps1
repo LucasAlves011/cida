@@ -479,3 +479,20 @@ function verificarFuncaoExistente {
     }
     return $false
 }
+
+function v {
+    param (
+        [string]$nome
+    )
+
+    Write-Host "Nome da funcao: " $nome "`n"
+            
+    $conteudoFuncao = Get-Content -path ("$CAMINHO_BASE\scripts\$nome.txt") -Raw -Encoding UTF8 
+    Write-host $conteudoFuncao "`n`n`n"
+
+    $escolha = Read-Host "Pressione Enter para voltar a tela ou C para copiar o conteudo da funcao para a area de transferencia: "
+    if ($escolha -eq 'C' -or $escolha -eq 'c') {
+        Clear-Host
+        mostrarMensagemPadrao '' $conteudoFuncao
+    }
+}

@@ -1,16 +1,19 @@
-﻿function a {
+﻿
+function a { 
     #Descricao= Seleciona cd_status,cd_status_nfe da tabela do produto.
     $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\a.txt" -Raw -Encoding UTF8
     addQtdUsada $MyInvocation.InvocationName
-    mostrarMensagemPadrao "Select A copiado" $conteudo
+    mostrarMensagemPadrao "a copiado." $conteudo
 }
+
  
-function b {
+function b { 
     #Descricao= Seleciona cd_status,cd_status_nfe da tabela do produto - PLANO DE SAUDE.
     $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\b.txt" -Raw -Encoding UTF8
     addQtdUsada $MyInvocation.InvocationName
-    mostrarMensagemPadrao "Select B copiado" $conteudo
+    mostrarMensagemPadrao "b copiado." $conteudo
 }
+
  
 function cons {
     #Descricao= Chama integração para CONSULTA.
@@ -139,12 +142,13 @@ function excluirxmlp {
     mostrarMensagemPadrao 'EXCLUIR XML PADRAO copiado.' $conteudo
 }
  
-function saida {
+function saida { 
     #Descricao= Parametros cadastro de saida.
     $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\saida.txt" -Raw -Encoding UTF8
     addQtdUsada $MyInvocation.InvocationName
-    mostrarMensagemPadrao  "Select saida copiado." $conteudo
+    mostrarMensagemPadrao "saida copiado." $conteudo
 }
+
  
 function url {
     #Descricao= Select da tabela sistemas, util para achar a url do soul.
@@ -290,7 +294,39 @@ function slog {
     #Descricao= Select para a tabela de log.
     $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\slog.txt" -Raw -Encoding UTF8
     addQtdUsada $MyInvocation.InvocationName
-    mostrarMensagemPadrao "slog copiado." $conteudo
+     mostrarMensagemPadrao "slog copiado." $conteudo
 }
 
+
+
+
+
+function cedimat { 
+    #Descricao= Credenciais de acesso ao cliente CEDIMAT.
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\cedimat.txt" -Raw -Encoding UTF8
+    addQtdUsada $MyInvocation.InvocationName
+    mostrarMensagemPadrao "cedimat copiado." $conteudo
+}
+
+
+function hn { 
+    #Descricao= Credenciais para acesso ao HN Panamá.
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\hn.txt" -Raw -Encoding UTF8
+    addQtdUsada $MyInvocation.InvocationName
+    mostrarMensagemPadrao "hn copiado." $conteudo
+}
+
+function cem { 
+    #Descricao= Select para pegar apenas os últimos 100.
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\cem.txt" -Raw -Encoding UTF8
+    addQtdUsada $MyInvocation.InvocationName
+    mostrarMensagemPadrao "cem copiado." $conteudo
+}
+
+function all { 
+    #Descricao= Procurar uma coluna em todas as tabela.
+    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\all.txt" -Raw -Encoding UTF8
+    addQtdUsada $MyInvocation.InvocationName
+    mostrarMensagemPadrao "all copiado." $conteudo
+}
 
