@@ -141,21 +141,27 @@ function mostrarMensagemPadrao {
         Set-Clipboard -value $conteudo
     }
 
-    write-host  "
-                                        ::::::::::::::::::   :
-                                    ^J555555555555555555: :P5?~:
-                                    ?P555555555555555555: :GGGGPY?~:
-                                    :755555555?!!777777!   YGGGGGGGPY?~:
-                                        :7Y55555Y7:           :!J5GGGGGGGPY7~:
-                                        :7Y5555557:             ^7YPGGGGGGGPY7^
-                                            !Y555555?                ^7YGGGGGGGG7
-                                            ^J555555Y:               ^7YGGGGGGGG7
-                                        ~J555555J~             :!JPGGGGGGGPY7^
-                                        ~J555555?^            ^7YGGGGGGGG5?~:
-                                    ~J5555555?~~~~~~~~~   JPGGGGGGG5J!:
-                                    75555555555555555555:  PGGGGPJ!^
-                                    ~Y555555555555555555:  PPY7^
-                                    :^~~~~~~~~~~~~~~~~~   ^
+    write-host  "                                                            
+                                                                                           
+                                 MVMVMVMVMVMVMVMVMVMVMVMVMV    MVM                         
+                                VMVMVMVMVMVMVMVMVMVMVMVMVMV    MVMVMVM                     
+                                VMVMVMVMVMVMVMVMVMVMVMVMVMV    MVMVMVMVMVM                 
+                                 MVMVMVMVMVMVMVMVMVMVMVMVMV    MVMVMVMVMVMVMV              
+                                   MVMVMVMVMVMV                 VMVMVMVMVMVMVMVMV          
+                                     MVMVMVMVMVMV                   VMVMVMVMVMVMVMVMV      
+                                       MVMVMVMVMVMV                    MVMVMVMVMVMVMVMVM   
+                                         MVMVMVMVMVMV                     VMVMVMVMVMVMVMVMV
+                                           MVMVMVMVMVM                        VMVMVMVMVMVMV
+                                           MVMVMVMVMVM                       MVMVMVMVMVMVMV
+                                         MVMVMVMVMVMV                     VMVMVMVMVMVMVMVM 
+                                       MVMVMVMVMVMV                    MVMVMVMVMVMVMVMV    
+                                     MVMVMVMVMVMV                  MVMVMVMVMVMVMVMVM       
+                                   MVMVMVMVMVMV                 VMVMVMVMVMVMVMVM           
+                                 MVMVMVMVMVMVMVMVMVMVMVMVMV    MVMVMVMVMVMVMV              
+                                VMVMVMVMVMVMVMVMVMVMVMVMVMV    MVMVMVMVMV                  
+                                VMVMVMVMVMVMVMVMVMVMVMVMVMV    MVMVMVM                     
+                                 MVMVMVMVMVMVMVMVMVMVMVMVMV    MVM                         
+   
     "
 
     if ($mensagem -ne $null -and $mensagem -ne '') {
@@ -183,6 +189,21 @@ function printCentralizado {
 }
 
 function cadastrar {
+	Add-Type @"
+using System;
+using System.Runtime.InteropServices;
+public class Win32 {
+	[DllImport("kernel32.dll")]
+	public static extern IntPtr GetConsoleWindow();
+	[DllImport("user32.dll")]
+	public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+}
+"@
+
+	$consolePtr = [Win32]::GetConsoleWindow()
+	# 2 = minimizar, 0 = ocultar
+	[Win32]::ShowWindow($consolePtr, 2)
+	
     #Descricao= Cadastrar funcao no powerShell.
     Add-Type -AssemblyName PresentationFramework
 
@@ -192,7 +213,7 @@ function cadastrar {
     $icon.EndInit()
 
     # Crie uma nova janela WPF
-    $window = New-Object System.Windows.Window
+    $window = New-Object System.Windows.Window 
     $window.Title = "Cadastro de Script"
     $window.Width = 500
     $window.Height = 550
@@ -281,17 +302,33 @@ function cadastrar {
     $window.AddChild($stack)
 
     # Exiba a janela
-    $null = $window.ShowDialog()
+    $null = $window.ShowDialog() 
     # Adicione os Labels, TextBoxes e o botão ao StackPanel
     Exit
 }
 
 function alterar {
+
+	param(
+			[string]$nomeScript
+    )	
+		Add-Type @"
+using System;
+using System.Runtime.InteropServices;
+public class Win32 {
+	[DllImport("kernel32.dll")]
+	public static extern IntPtr GetConsoleWindow();
+	[DllImport("user32.dll")]
+	public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+}
+"@
+
+	$consolePtr = [Win32]::GetConsoleWindow()
+	# 2 = minimizar, 0 = ocultar
+	[Win32]::ShowWindow($consolePtr, 2)
     #Descricao= Alterar script.
 
-    param(
-        [string]$nomeScript
-    )
+    
     #Descricao= Alterar script no powerShell.
     Add-Type -AssemblyName PresentationFramework
 
