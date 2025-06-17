@@ -18,8 +18,7 @@ function f {
         $funcao.Id = $obj.id
         $funcao.Nome = $obj.nome
         $funcao.Descricao = $obj.descricao
-        $funcao.Qtd_usada = $obj.qtd_usada
-        $funcao.Sn_interna = $obj.sn_interna
+        $funcao.Qtd_usada = $obj.qtd_usada        
         $listaFuncoes += $funcao
     }
 
@@ -289,7 +288,7 @@ public class Win32 {
                 $conteudo = formatarFuncao $scriptName $textBoxDescricao.Text
 
                 $conteudo | Out-File -FilePath $CAMINHO_FUNCOES_PS1 -Append  -Encoding utf8
-
+                
                 cadastrarNovaFuncaoAoJson -Nome $scriptName -Descricao $textBoxDescricao.Text
 
                 [System.Windows.MessageBox]::Show("Script salvo com sucesso!", "Sucesso", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Information) # Feche a janela após salvar
