@@ -8,7 +8,7 @@ function f {
     param(
         [string]$Ordernacao = "DESC"
     )
- 
+
     $jsonContent = Get-Content -Path  $CAMINHO_JSON_FUNCTION_NAMES -Raw | ConvertFrom-Json
 
     $listaFuncoes = @()
@@ -18,8 +18,7 @@ function f {
         $funcao.Id = $obj.id
         $funcao.Nome = $obj.nome
         $funcao.Descricao = $obj.descricao
-        $funcao.Qtd_usada = $obj.qtd_usada
-        $funcao.Sn_interna = $obj.sn_interna
+        $funcao.Qtd_usada = $obj.qtd_usada        
         $listaFuncoes += $funcao
     }
 
@@ -27,12 +26,12 @@ function f {
         $listaFuncoes = $listaFuncoes | Sort-Object -Property Qtd_usada -Descending
     }
     else {
-        $listaFuncoes = $listaFuncoes | Sort-Object -Property Qtd_usada 
+        $listaFuncoes = $listaFuncoes | Sort-Object -Property Qtd_usada
     }
- 
+
 
     do {
-        $listaFuncoes | Format-Table Nome, Descricao -AutoSize 
+        $listaFuncoes | Format-Table Nome, Descricao -AutoSize
 
         $escolhaFuncao = Read-Host "Qual funcao deseja escolher "
 
@@ -46,8 +45,8 @@ function f {
 
                 Write-Host "Nome da funcao: " $funcao.Nome "`n"
                 Write-Host "Descricao: " $funcao.Descricao "`n`n"
-                
-                $conteudoFuncao = Get-Content -path ("$CAMINHO_BASE\scripts\$($funcao.Nome).txt") -Raw -Encoding UTF8 
+
+                $conteudoFuncao = Get-Content -path ("$CAMINHO_PASTA_SCRIPTS\$($funcao.Nome).txt") -Raw -Encoding UTF8
                 Write-host $conteudoFuncao "`n`n`n"
 
                 $escolha = Read-Host "Pressione Enter para voltar a tela ou C para copiar o conteudo da funcao para a area de transferencia: "
@@ -57,8 +56,8 @@ function f {
                 }
             }
             else {
-                Write-Host "Funcao nao encontrada" "`n" -ForegroundColor Red 
-                Start-Sleep -Milliseconds 1500 
+                Write-Host "Funcao nao encontrada" "`n" -ForegroundColor Red
+                Start-Sleep -Milliseconds 1500
             }
             Clear-Host
         }
@@ -119,7 +118,7 @@ function c {
         }
         else {
             #abrir a pasta clientes
-            Start-Process explorer.exe -ArgumentList $caminho 
+            Start-Process explorer.exe -ArgumentList $caminho
             Exit
         }
         $previneLoop++;
@@ -141,27 +140,27 @@ function mostrarMensagemPadrao {
         Set-Clipboard -value $conteudo
     }
 
-    write-host  "                                                            
-                                                                                           
-                                 MVMVMVMVMVMVMVMVMVMVMVMVMV    MVM                         
-                                VMVMVMVMVMVMVMVMVMVMVMVMVMV    MVMVMVM                     
-                                VMVMVMVMVMVMVMVMVMVMVMVMVMV    MVMVMVMVMVM                 
-                                 MVMVMVMVMVMVMVMVMVMVMVMVMV    MVMVMVMVMVMVMV              
-                                   MVMVMVMVMVMV                 VMVMVMVMVMVMVMVMV          
-                                     MVMVMVMVMVMV                   VMVMVMVMVMVMVMVMV      
-                                       MVMVMVMVMVMV                    MVMVMVMVMVMVMVMVM   
+    write-host  "
+
+                                 MVMVMVMVMVMVMVMVMVMVMVMVMV    MVM
+                                VMVMVMVMVMVMVMVMVMVMVMVMVMV    MVMVMVM
+                                VMVMVMVMVMVMVMVMVMVMVMVMVMV    MVMVMVMVMVM
+                                 MVMVMVMVMVMVMVMVMVMVMVMVMV    MVMVMVMVMVMVMV
+                                   MVMVMVMVMVMV                 VMVMVMVMVMVMVMVMV
+                                     MVMVMVMVMVMV                   VMVMVMVMVMVMVMVMV
+                                       MVMVMVMVMVMV                    MVMVMVMVMVMVMVMVM
                                          MVMVMVMVMVMV                     VMVMVMVMVMVMVMVMV
                                            MVMVMVMVMVM                        VMVMVMVMVMVMV
                                            MVMVMVMVMVM                       MVMVMVMVMVMVMV
-                                         MVMVMVMVMVMV                     VMVMVMVMVMVMVMVM 
-                                       MVMVMVMVMVMV                    MVMVMVMVMVMVMVMV    
-                                     MVMVMVMVMVMV                  MVMVMVMVMVMVMVMVM       
-                                   MVMVMVMVMVMV                 VMVMVMVMVMVMVMVM           
-                                 MVMVMVMVMVMVMVMVMVMVMVMVMV    MVMVMVMVMVMVMV              
-                                VMVMVMVMVMVMVMVMVMVMVMVMVMV    MVMVMVMVMV                  
-                                VMVMVMVMVMVMVMVMVMVMVMVMVMV    MVMVMVM                     
-                                 MVMVMVMVMVMVMVMVMVMVMVMVMV    MVM                         
-   
+                                         MVMVMVMVMVMV                     VMVMVMVMVMVMVMVM
+                                       MVMVMVMVMVMV                    MVMVMVMVMVMVMVMV
+                                     MVMVMVMVMVMV                  MVMVMVMVMVMVMVMVM
+                                   MVMVMVMVMVMV                 VMVMVMVMVMVMVMVM
+                                 MVMVMVMVMVMVMVMVMVMVMVMVMV    MVMVMVMVMVMVMV
+                                VMVMVMVMVMVMVMVMVMVMVMVMVMV    MVMVMVMVMV
+                                VMVMVMVMVMVMVMVMVMVMVMVMVMV    MVMVMVM
+                                 MVMVMVMVMVMVMVMVMVMVMVMVMV    MVM
+
     "
 
     if ($mensagem -ne $null -and $mensagem -ne '') {
@@ -189,7 +188,7 @@ function printCentralizado {
 }
 
 function cadastrar {
-	Add-Type @"
+    Add-Type @"
 using System;
 using System.Runtime.InteropServices;
 public class Win32 {
@@ -200,10 +199,10 @@ public class Win32 {
 }
 "@
 
-	$consolePtr = [Win32]::GetConsoleWindow()
-	# 2 = minimizar, 0 = ocultar
-	[Win32]::ShowWindow($consolePtr, 2)
-	
+    $consolePtr = [Win32]::GetConsoleWindow()
+    # 2 = minimizar, 0 = ocultar
+    [Win32]::ShowWindow($consolePtr, 2)
+
     #Descricao= Cadastrar funcao no powerShell.
     Add-Type -AssemblyName PresentationFramework
 
@@ -213,7 +212,7 @@ public class Win32 {
     $icon.EndInit()
 
     # Crie uma nova janela WPF
-    $window = New-Object System.Windows.Window 
+    $window = New-Object System.Windows.Window
     $window.Title = "Cadastro de Script"
     $window.Width = 500
     $window.Height = 550
@@ -280,16 +279,16 @@ public class Win32 {
                 # Salve o script
 
                 # Cria a pasta se não existir
-                if (-not (Test-Path -Path "$CAMINHO_BASE/scripts" -PathType Container)) {
-                    New-Item -Path "$CAMINHO_BASE/scripts" -ItemType Directory -Force
+                if (-not (Test-Path -Path "$CAMINHO_PASTA_SCRIPTS" -PathType Container)) {
+                    New-Item -Path "$CAMINHO_PASTA_SCRIPTS" -ItemType Directory -Force
                 }
 
-                $scriptContent | Out-File -FilePath "$CAMINHO_BASE/scripts\$scriptName.txt" -Encoding utf8
+                $scriptContent | Out-File -FilePath "$CAMINHO_PASTA_SCRIPTS\$scriptName.txt" -Encoding utf8
 
                 $conteudo = formatarFuncao $scriptName $textBoxDescricao.Text
 
-                $conteudo | Out-File -FilePath "$PSScriptRoot\funcoes.ps1" -Append  -Encoding utf8
-
+                $conteudo | Out-File -FilePath $CAMINHO_FUNCOES_PS1 -Append  -Encoding utf8
+                
                 cadastrarNovaFuncaoAoJson -Nome $scriptName -Descricao $textBoxDescricao.Text
 
                 [System.Windows.MessageBox]::Show("Script salvo com sucesso!", "Sucesso", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Information) # Feche a janela após salvar
@@ -302,17 +301,17 @@ public class Win32 {
     $window.AddChild($stack)
 
     # Exiba a janela
-    $null = $window.ShowDialog() 
+    $null = $window.ShowDialog()
     # Adicione os Labels, TextBoxes e o botão ao StackPanel
     Exit
 }
 
 function alterar {
 
-	param(
-			[string]$nomeScript
-    )	
-		Add-Type @"
+    param(
+        [string]$nomeScript
+    )
+    Add-Type @"
 using System;
 using System.Runtime.InteropServices;
 public class Win32 {
@@ -323,12 +322,12 @@ public class Win32 {
 }
 "@
 
-	$consolePtr = [Win32]::GetConsoleWindow()
-	# 2 = minimizar, 0 = ocultar
-	[Win32]::ShowWindow($consolePtr, 2)
+    $consolePtr = [Win32]::GetConsoleWindow()
+    # 2 = minimizar, 0 = ocultar
+    [Win32]::ShowWindow($consolePtr, 2)
     #Descricao= Alterar script.
 
-    
+
     #Descricao= Alterar script no powerShell.
     Add-Type -AssemblyName PresentationFramework
 
@@ -351,7 +350,7 @@ public class Win32 {
     $id = getIdFuncao $nomeScript
 
     $nomeAntigoScript = $nomeScript
-    $arquivoFuncoes = Get-Content -Path "$CAMINHO_BASE/funcoes.ps1" -Raw -Encoding UTF8
+    $arquivoFuncoes = Get-Content -Path $CAMINHO_FUNCOES_PS1 -Raw -Encoding UTF8
 
     if ($nomeScript -eq '' -or $nomeScript -eq $null) {
         [System.Windows.MessageBox]::Show("Nao e possivel alterar um script com nome vazio ou nulo.", "Alterar script", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Error)
@@ -375,7 +374,7 @@ public class Win32 {
         write-host 'Descrição não encontrada'
     }
 
-    $conteudo = Get-Content -Path "$CAMINHO_BASE/scripts/$nomeScript.txt" -Raw -Encoding UTF8
+    $conteudo = Get-Content -Path "$CAMINHO_PASTA_SCRIPTS/$nomeScript.txt" -Raw -Encoding UTF8
 
     # Crie um Label e um TextBox para o nome do script
     $labelNome = New-Object System.Windows.Controls.Label
@@ -454,14 +453,14 @@ public class Win32 {
 
                 if ($scriptName -ne $nomeAntigoScript) {
                     #alterar nome do arquivo
-                    Rename-Item -Path "$CAMINHO_BASE/scripts/$nomeAntigoScript.txt" -NewName "$scriptName.txt"
+                    Rename-Item -Path "$CAMINHO_PASTA_SCRIPTS/$nomeAntigoScript.txt" -NewName "$scriptName.txt"
                 }
 
                 # Salve o script
-                $scriptContent | Out-File -FilePath "$CAMINHO_BASE/scripts\$scriptName.txt" -Encoding utf8
-                
+                $scriptContent | Out-File -FilePath "$CAMINHO_PASTA_SCRIPTS\$scriptName.txt" -Encoding utf8
+
                 # $arquivoFuncoes | Out-File -FilePath "$CAMINHO_BASE/funcoes.ps1" -Encoding utf8
-                Set-Content -Path "$CAMINHO_BASE/funcoes.ps1" -Value $arquivoFuncoes -Encoding UTF8
+                Set-Content -Path $CAMINHO_FUNCOES_PS1 -Value $arquivoFuncoes -Encoding UTF8
                 modificarJson -Id $id -Nome $scriptName -Descricao $descricao
 
                 [System.Windows.MessageBox]::Show("Script alterado com sucesso!", "Sucesso", [System.Windows.MessageBoxButton]::OK, [System.Windows.MessageBoxImage]::Information) # Feche a janela após salvar
@@ -491,7 +490,7 @@ function formatarFuncao {
 
     $conteudo = "`nfunction $nomeFuncao { `n" +
     "    #Descricao= " + $descricao + "`n" +
-    '    $conteudo = Get-Content -path "$CAMINHO_BASE/scripts\' + $nomeFuncao + ".txt`"" + " -Raw -Encoding UTF8`n" +
+    '    $conteudo = Get-Content -path "$CAMINHO_PASTA_SCRIPTS\' + $nomeFuncao + ".txt`"" + " -Raw -Encoding UTF8`n" +
     '    addQtdUsada $MyInvocation.InvocationName' + "`n" +
     "    mostrarMensagemPadrao " + "`"$nomeFuncao copiado.`"" + ' $conteudo' + "`n" +
     "}`n"
@@ -523,8 +522,8 @@ function v {
     )
 
     Write-Host "Nome da funcao: " $nome "`n"
-            
-    $conteudoFuncao = Get-Content -path ("$CAMINHO_BASE\scripts\$nome.txt") -Raw -Encoding UTF8 
+
+    $conteudoFuncao = Get-Content -path ("$CAMINHO_PASTA_SCRIPTS\$nome.txt") -Raw -Encoding UTF8
     Write-host $conteudoFuncao "`n`n`n"
 
     $escolha = Read-Host "Pressione Enter para voltar a tela ou C para copiar o conteudo da funcao para a area de transferencia: "
@@ -532,4 +531,9 @@ function v {
         Clear-Host
         mostrarMensagemPadrao '' $conteudoFuncao
     }
+}
+
+function teste {
+    $pai = [System.IO.Directory]::GetParent($PSScriptRoot).FullName
+    Write-Host "Pasta anterior: $pai"
 }
